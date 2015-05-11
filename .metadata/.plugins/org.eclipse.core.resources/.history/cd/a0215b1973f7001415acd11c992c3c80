@@ -1,0 +1,38 @@
+package br.edu.unitri.projectmanager.domain;
+
+import java.util.List;
+
+import br.edu.unitri.projectmanager.dao.DepartamentoDAO;
+import br.edu.unitri.projectmanager.dao.EmpregadoDAO;
+
+public class EmpregadoTest {
+	public static void main(String args[]) {
+		EmpregadoDAO empregadoDAO = new EmpregadoDAO();
+
+		DepartamentoDAO departamentoDAO = new DepartamentoDAO();
+		Departamento d1 = new Departamento("Comercial", "Comercial");
+
+		departamentoDAO.insereDepartamento(d1);
+
+		Departamento departamento = departamentoDAO
+				.consultaDepartamentoPorId(d1.getId());
+		
+		Empregado c1 = new Empregado("Maria", "2345234534", departamento);
+		Empregado c2 = new Empregado("José", "2345234534", departamento);
+		Empregado c3 = new Empregado("Antonio", "2345234534", departamento);
+		Empregado c4 = new Empregado("Joana", "3425234", departamento);
+
+		empregadoDAO.insereEmpregado(c1);
+		empregadoDAO.insereEmpregado(c2);
+		empregadoDAO.insereEmpregado(c3);
+		empregadoDAO.insereEmpregado(c4);
+
+		List<Empregado> empregados = empregadoDAO.consultaEmpregado();
+		for (Empregado empregado : empregados) {
+			System.out.println("Empregado Name Inseridos: "
+					+ empregado.getNome() + " = " + "cpf: "
+					+ empregado.getMatricula());
+		}
+
+	}
+}

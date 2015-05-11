@@ -1,0 +1,29 @@
+package br.edu.unitri.aula03locacao;
+
+import java.util.List;
+
+import br.edu.unitri.aula03locacao.dao.ClienteDAO;
+import br.edu.unitri.aula03locacao.domain.Cliente;
+
+public class ClienteTest {
+	public static void main(String args[]) {
+		ClienteDAO clienteDAO = new ClienteDAO();
+
+		Fornecedor f1 = new Fornecedor("Alpargatas");
+		Fornecedor f2 = new Fornecedor("Unilever");
+		Fornecedor f3 = new Fornecedor("Sadia");
+		Fornecedor f4 = new Fornecedor("Perdigão");
+
+		fornecedorDao.insereFornecedor(f1);
+		fornecedorDao.insereFornecedor(f2);
+		fornecedorDao.insereFornecedor(f3);
+		fornecedorDao.insereFornecedor(f4);
+
+		List<Cliente> clientes = clienteDAO.consultaCliente();
+		for (Cliente cliente : clientes) {
+			System.out.println("Cliente Name: " + cliente.getNome() + " = "
+					+ "cpf: " + cliente.getCpf());
+		}
+
+	}
+}

@@ -1,0 +1,203 @@
+package br.edu.unitri.aula06livro.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
+import javax.persistence.Tuple;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Subquery;
+
+import br.edu.unitri.aula06livro.domain.Autor;
+import br.edu.unitri.aula06livro.domain.Livro;
+import br.edu.unitri.aula06livro.util.JPAUtil;
+
+public class AutorDAO {
+	EntityManager manager = null;
+
+	public AutorDAO() {
+		manager = new JPAUtil().getEntityManager();
+
+	}
+
+	public void insereAutor(Autor autor) {
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+		manager.persist(autor);
+		tx.commit();
+	}
+
+	public Autor buscaPorId(Long id) {
+		return manager.find(Autor.class, id);
+	}
+
+	public List<Autor> consultaFornedorByJpaQl() {
+		TypedQuery<Autor> query = manager.createQuery("Select f from Autor f",
+				Autor.class);
+		return query.getResultList();
+	}
+
+	public List<Autor> consultaFornedorByCriteria() {
+		CriteriaBuilder cb = manager.getCriteriaBuilder();
+		CriteriaQuery<Autor> cq = cb.createQuery(Autor.class);
+		return manager.createQuery(cq).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Autor> consultaFornedorBySQLNativo() {
+		Query q = manager.createNativeQuery("Select * from tb_autor",
+				Autor.class);
+		return q.getResultList();
+	}
+
+	public List<Autor> getLivrosDeAutoresComFetchJoin() {
+		CriteriaBuilder cb = manager.getCriteriaBuilder();
+		CriteriaQuery<Autor> qAutor = cb.createQuery(Autor.class);
+		Root<Autor> root = qAutor.from(Autor.class);
+		root.fetch("livros", JoinType.LEFT);
+		qAutor.select(root).distinct(true);
+		return manager.createQuery(qAutor).getResultList();
+	}
+
+	public List<Autor> getLivrosDeAutores() {
+		CriteriaBuilder cb = manager.getCriteriaBuilder();
+		CriteriaQuery<Autor> qAutor = cb.createQuery(Autor.class);
+		Root<Autor> root = qAutor.from(Autor.class);
+		qAutor.select(root);
+		return manager.createQuery(qAutor).getResultList();
+	}
+
+	public Livro testeSubqueries() {
+		/*
+		 * CriteriaBuilder cb = em.getCriteriaBuilder();
+		 * 
+		 * CriteriaQuery<Double> query = cb.createQuery(Double.class);
+		 * Root<Livro> livro = query.from(Livro.class);
+		 * query.select(root.<Double>get("preco")));
+		 * 
+		 * cb.isMember(livro, livro.<Editora> get(" editora ")
+		 * .<Collection<Livro>> get(" maisVendidos "));
+		 */
+
+		CriteriaBuilder cb = manager.getCriteriaBuilder();
+		CriteriaQuery<Livro> c = cb.createQuery(Livro.class);
+		Root<Livro> livro1 = c.from(Livro.class);
+		c.select(livro1);
+		Subquery<Livro> subquery = c.subquery(Livro.class);
+		Root<Livro> livro2 = subquery.from(Livro.class);
+		subquery.select(livro2);
+		Predicate predicate = cb.greaterThan(livro2.<Double> get("preco"),
+				livro1.<Double> get("preco"));
+		subquery.where(predicate);
+		Predicate predicate2 = cb.not(cb.exists(subquery));
+		c.where(predicate2);
+		TypedQuery<Livro> tyQuery = manager.createQuery(c);
+
+		return tyQuery.getSingleResult();
+		System.out.println(precoL);
+	}
+
+	private static void selectWhere() {
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+
+		CriteriaQuery<Double> query = builder.createQuery(Double.class);
+		Root<Livro> root = query.from(Livro.class);
+		query.select(builder.avg(root.<Double> get("preco")));
+
+		Predicate predicate = builder.ge(root.<Double> get("id"), 3);
+		query.where(predicate);
+
+		Double precoMedioFilt = em.createQuery(query).getSingleResult();
+		System.out.printf("Pre�o M�dio: %.2f\n", precoMedioFilt);
+
+	}
+
+	private static void selectComTupla() {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> queryMS = cb.createQuery(Tuple.class);
+		Root<Livro> rootLivro = queryMS.from(Livro.class);
+		queryMS.multiselect(rootLivro.get("nome").alias("nomeT"), rootLivro
+				.get("preco").alias("precoT"));
+		List<Tuple> resultado = em.createQuery(queryMS).getResultList();
+		for (Tuple tuple : resultado) {
+			System.out.println(tuple.get("nomeT") + " " + tuple.get("precoT"));
+		}
+
+	}
+
+	private static void getSomaPrecos() {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Double> cq = cb.createQuery(Double.class);
+		Root<Livro> root = cq.from(Livro.class);
+		cq.select(cb.sum(root.<Double> get("preco")));
+
+		Double total = em.createQuery(cq).getSingleResult();
+		System.out.printf("%.2f", total);
+
+	}
+
+	private static void getPrecoMedio() {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Double> cq = cb.createQuery(Double.class);
+		Root<Livro> root = cq.from(Livro.class);
+		cq.select(cb.avg(root.<Double> get("preco")));
+
+		Double precoMedio = em.createQuery(cq).getSingleResult();
+		System.out.println(precoMedio);
+
+	}
+
+	private static void selectAllNomesPrecosLivros() {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
+
+		Root<Livro> root = cq.from(Livro.class);
+		cq.multiselect(root.<String> get("nome"), root.<Double> get("preco"));
+
+		TypedQuery<Object[]> query = em.createQuery(cq);
+		List<Object[]> livros = query.getResultList();
+
+		for (Object[] livro : livros) {
+			System.out.println(livro[0] + " " + livro[1]);
+		}
+
+	}
+
+	private static void selectAllNomesLivros() {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<String> cq = cb.createQuery(String.class);
+
+		Root<Livro> root = cq.from(Livro.class);
+		cq.select(root.<String> get("nome"));
+
+		TypedQuery<String> query = em.createQuery(cq);
+		List<String> livros = query.getResultList();
+
+		for (String livro : livros) {
+			System.out.println(livro);
+		}
+
+	}
+
+	private static void selectAllLivros() {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Livro> cq = cb.createQuery(Livro.class);
+
+		Root<Livro> root = cq.from(Livro.class);
+		cq.select(root);
+
+		TypedQuery<Livro> query = em.createQuery(cq);
+		List<Livro> livros = query.getResultList();
+
+		for (Livro livro : livros) {
+			System.out.println(livro);
+		}
+
+	}
+}

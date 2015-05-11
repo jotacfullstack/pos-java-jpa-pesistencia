@@ -1,0 +1,52 @@
+package br.edu.unitri.aula04pessoa.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+
+import br.edu.unitri.aula04pessoa.domain.Pessoa;
+import br.edu.unitri.aula04pessoa.util.JPAUtil;
+
+public class PessoaDAO {
+	EntityManager manager = null;
+
+	public PessoaDAO() {
+		manager = new JPAUtil().getEntityManager();
+
+	}
+
+	public void inserePessoa(Pessoa Pessoa) {
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+		manager.persist(Pessoa);
+		tx.commit();
+	}
+
+	public Pessoa findById(Long id) {
+		return manager.find(Pessoa.class, id);
+	}
+
+	public List<Pessoa> consultaPessoaByJpaQl() {
+		TypedQuery<Pessoa> query = manager.createQuery(
+				"Select f from Pessoa f", Pessoa.class);
+		return query.getResultList();
+	}
+
+	public List<Pessoa> consultaPessoaByCriteria() {
+		CriteriaBuilder cb = manager.getCriteriaBuilder();
+		CriteriaQuery<Pessoa> cq = cb.createQuery(Pessoa.class);
+		return manager.createQuery(cq).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Pessoa> consultaPessoaBySQLNativo() {
+		Query q = manager.createNativeQuery("Select * from tb_produto",
+				Pessoa.class);
+		return q.getResultList();
+	}
+}

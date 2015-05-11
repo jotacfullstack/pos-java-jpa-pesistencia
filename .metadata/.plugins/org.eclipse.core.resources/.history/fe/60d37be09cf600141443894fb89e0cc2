@@ -1,0 +1,10 @@
+package br.com.psi.util;
+
+public class JPAUtil {
+	private static EntityManagerFactory emf = Persistence
+			.createEntityManagerFactory("maisExemplosPU");
+
+	public static EntityManager createEntityManager() {
+		return emf.createEntityManager();
+	}
+}

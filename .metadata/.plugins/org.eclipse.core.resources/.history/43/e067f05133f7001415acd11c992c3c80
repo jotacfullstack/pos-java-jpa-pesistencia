@@ -1,0 +1,5 @@
+package br.edu.unitri.aula03locacao.domain;
+
+public class Departamento {
+
+}

@@ -1,0 +1,8 @@
+package br.edu.unitri.aula03locacao.domain;
+
+public class Veiculo {
+
+	descicao
+	modelo
+	fator_preco
+}

@@ -1,0 +1,17 @@
+package br.edu.unitri.aula06livro.main;
+
+import br.edu.unitri.aula06livro.dao.AutorDAO;
+import br.edu.unitri.aula06livro.dao.LivroDAO;
+import br.edu.unitri.aula06livro.domain.Autor;
+import br.edu.unitri.aula06livro.domain.Livro;
+
+public class PopulaAutoresLivros {
+	public static void main(String[] args) {
+		populaAutoresLivros();
+
+	}
+
+	private static void populaAutoresLivros() {
+
+	}
+}

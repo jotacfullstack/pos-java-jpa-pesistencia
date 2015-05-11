@@ -1,0 +1,21 @@
+package br.com.psi.jpa;
+
+
+public class JpaTest {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+	}
+
+	private void createEmployees() {
+
+	}
+
+	private void listEmployees() {
+
+	}
+
+}

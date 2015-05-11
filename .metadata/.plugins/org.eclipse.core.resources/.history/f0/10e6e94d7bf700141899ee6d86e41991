@@ -1,0 +1,39 @@
+package br.edu.unitri.projectmanager;
+
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import br.edu.unitri.projectmanager.domain.ProjetoPorEmpregado;
+import br.edu.unitri.projectmanager.domain.ProjetoPorEmpregadoPK;
+
+public class ProjetoPorEmpregadoPorEmpregadoTest {
+	ProjetoPorEmpregadoDAO projetoPorEmpregadoPorEmpregadoDAO = null;
+
+	@Before
+	public void init() {
+		projetoPorEmpregadoPorEmpregadoDAO = new ProjetoPorEmpregadoPorEmpregadoDAO();
+	}
+
+	@Test
+	public void adicionaProjetoPorEmpregadoProjetoPorEmpregados() {
+		ProjetoPorEmpregadoPK id = new ProjetoPorEmpregadoPK();
+		id.setCodEmpregado(34234l);
+		id.setNumProjeto(3241231l);
+		ProjetoPorEmpregado d1 = new ProjetoPorEmpregado(id, 23412);
+		ProjetoPorEmpregado d2 = new ProjetoPorEmpregado(id, 342);
+		projetoPorEmpregadoDAO.insereProjetoPorEmpregadoPorEmpregado(d1);
+		projetoPorEmpregadoDAO.insereProjetoPorEmpregadoPorEmpregado(d2);
+	}
+
+	@Test
+	public void listaProjetoPorEmpregados() {
+		List<ProjetoPorEmpregado> projetoPorEmpregados = projetoPorEmpregadoDAO.consultaProjetoPorEmpregado();
+		for (ProjetoPorEmpregado projetoPorEmpregado : projetoPorEmpregados) {
+			System.out.println("Avaria Name Inseridos: "
+					+ projetoPorEmpregado.getDescricao());
+		}
+	}
+
+}

@@ -1,0 +1,8 @@
+package br.edu.unitri.aula03locacao.domain;
+
+@Entity
+@Table(name="tb_funcionario")
+public class Funcionario {
+nome
+matricula
+}

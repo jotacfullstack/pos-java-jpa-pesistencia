@@ -1,0 +1,84 @@
+package br.edu.unitri.aula03locacao.domain;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tb_veiculo")
+public class Veiculo implements Serializable {
+
+	private static final long serialVersionUID = 2080863037946022004L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private String id;
+	private String descicao;
+	private String modelo;
+	@Column(name = "fator_preco")
+	private Double fatorPreco;
+
+	@ManyToOne
+	@JoinColumn(name = "veiculo_categoria_id")
+	private VeiculoCategoria veiculoCategoria;
+
+	public Veiculo() {
+		super();
+	}
+
+	public Veiculo(String descicao, String modelo, Double fatorPreco,
+			VeiculoCategoria veiculoCategoria) {
+		super();
+		this.descicao = descicao;
+		this.modelo = modelo;
+		this.fatorPreco = fatorPreco;
+		this.veiculoCategoria = veiculoCategoria;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getDescicao() {
+		return descicao;
+	}
+
+	public void setDescicao(String descicao) {
+		this.descicao = descicao;
+	}
+
+	public String getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
+	}
+
+	public Double getFatorPreco() {
+		return fatorPreco;
+	}
+
+	public void setFatorPreco(Double fatorPreco) {
+		this.fatorPreco = fatorPreco;
+	}
+
+	public VeiculoCategoria getVeiculoCategoria() {
+		return veiculoCategoria;
+	}
+
+	public void setVeiculoCategoria(VeiculoCategoria veiculoCategoria) {
+		this.veiculoCategoria = veiculoCategoria;
+	}
+
+}

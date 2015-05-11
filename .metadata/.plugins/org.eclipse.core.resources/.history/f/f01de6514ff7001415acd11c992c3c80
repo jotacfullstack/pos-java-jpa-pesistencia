@@ -1,0 +1,5 @@
+package br.edu.unitri.aula04pessoa.domain;
+
+public class Endereco {
+
+}

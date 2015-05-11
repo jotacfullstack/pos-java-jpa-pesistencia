@@ -1,0 +1,94 @@
+package br.edu.unitri.projectmanager.domain;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tb_depedente")
+public class Dependente {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	private String nome;
+
+	private String sexo;
+
+	@Column(name = "data_nascimento")
+	private Date dataNascimento;
+
+	private String tipo;
+
+	@ManyToOne
+	private Empregado empregado;
+
+	public Dependente(String nome) {
+		this.nome = nome;
+	}
+
+	public Dependente() {
+		super();
+	}
+
+	public Dependente(String nome, Empregado empregado) {
+		this.nome = nome;
+		this.empregado = empregado;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public Empregado getEmpregado() {
+		return empregado;
+	}
+
+	public void setEmpregado(Empregado empregado) {
+		this.empregado = empregado;
+	}
+
+}

@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Sun May 10 21:43:19 BRT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-014d-406d-0fdc-000002fb5230 
+on database directory memory:/Users/rogeriofontes/Documents/workspace-pos-java-persistencia/ProjectManagementAula05e06/managerv12Db with class loader sun.misc.Launcher$AppClassLoader@4b1210ee 
+Loaded from file:/Users/rogeriofontes/.m2/repository/org/apache/derby/derby/10.11.1.1/derby-10.11.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_25-b17
+user.dir=/Users/rogeriofontes/Documents/workspace-pos-java-persistencia/ProjectManagementAula05e06
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.9.5
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

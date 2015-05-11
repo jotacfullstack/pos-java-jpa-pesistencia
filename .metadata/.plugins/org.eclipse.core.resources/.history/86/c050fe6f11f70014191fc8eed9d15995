@@ -1,0 +1,45 @@
+package br.edu.unitri.aula02produto.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+
+import br.edu.unitri.aula02produto.domain.Fornecedor;
+import br.edu.unitri.aula02produto.util.JPAUtil;
+
+public class FornecedorDAO {
+	EntityManager manager = null;
+
+	public FornecedorDAO() {
+		manager = new JPAUtil.getEntityManager();
+
+	}
+
+	public void insereFornecedor(Fornecedor fornecedor) {
+		System.out.println("dor->" + fornecedor);
+		em.persist(fornecedor);
+	}
+
+	public List<Fornecedor> consultaFornedorByJpaQl() {
+		TypedQuery<Fornecedor> query = em.createQuery(
+				"Select f from Fornecedor f", Fornecedor.class);
+		return query.getResultList();
+	}
+
+	public List<Fornecedor> consultaFornedorByCriteria() {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Fornecedor> cq = cb.createQuery(Fornecedor.class);
+		return em.createQuery(cq).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Fornecedor> consultaFornedorBySQLNativo() {
+		Query q = em.createNativeQuery("Select * from tb_fornecedor",
+				Fornecedor.class);
+		return q.getResultList();
+	}
+}

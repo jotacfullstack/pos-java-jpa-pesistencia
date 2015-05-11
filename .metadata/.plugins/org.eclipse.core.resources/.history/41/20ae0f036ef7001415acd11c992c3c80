@@ -1,0 +1,32 @@
+package br.edu.unitri.projectmanager.domain;
+
+import java.io.Serializable;
+
+import javax.persistence.Embeddable;
+import javax.persistence.ManyToOne;
+
+@Embeddable
+public class LocalPorDeportamentoPK implements Serializable {
+
+	@ManyToOne
+	private Local local;
+	@ManyToOne
+	private Departamento departamento;
+
+	public Local getLocal() {
+		return local;
+	}
+
+	public void setLocal(Local local) {
+		this.local = local;
+	}
+
+	public Departamento getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
+	}
+
+}

@@ -1,0 +1,42 @@
+package br.edu.unitri.aula03locacao;
+
+import java.util.List;
+
+import br.edu.unitri.aula03locacao.dao.AvariaDAO;
+import br.edu.unitri.aula03locacao.domain.Avaria;
+
+public class AvariaTest {
+	public static void main(String args[]) {
+		AvariaDAO avariaDAO = new AvariaDAO();
+
+		Avaria c1 = new Avaria("Maria", "2345234534");
+		Avaria c2 = new Avaria("José", "2345234534");
+		Avaria c3 = new Avaria("Antonio", "2345234534");
+		Avaria c4 = new Avaria("Joana", "3425234");
+
+		avariaDAO.insereAvaria(c1);
+		avariaDAO.insereAvaria(c2);
+		avariaDAO.insereAvaria(c3);
+		avariaDAO.insereAvaria(c4);
+		
+		List<Avaria> avarias = avariaDAO.consultaAvaria();
+		for (Avaria avaria : avarias) {
+			System.out.println("Avaria Name Inseridos: " + avaria.getNome() + " = "
+					+ "cpf: " + avaria.getCpf());
+		}
+		
+		Avaria result = avariaDAO.consultaAvariaPorId(1l);
+		result.setNome("Maria Guilhermina");
+		
+		avariaDAO.alteraAvaria(result);
+		
+		Avaria remove = avariaDAO.consultaAvariaPorId(3l);
+		avariaDAO.deleteAvaria(remove);
+		
+		List<Avaria> avariasAlterados = avariaDAO.consultaAvaria();
+		for (Avaria avaria : avariasAlterados) {
+			System.out.println("Avaria Name alterados: " + avaria.getNome() + " = "
+					+ "cpf: " + avaria.getCpf());
+		}
+	}
+}

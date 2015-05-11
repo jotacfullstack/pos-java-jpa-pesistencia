@@ -1,0 +1,135 @@
+package br.edu.unitri.projectmanager.domain;
+
+import java.util.List;
+
+import javax.persistence.Tuple;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import br.edu.unitri.projectmanager.dao.DepartamentoDAO;
+
+public class DepartamentoTest {
+	DepartamentoDAO departamentoDAO = null;
+
+	@Before
+	public void init() {
+		departamentoDAO = new DepartamentoDAO();
+	}
+
+	@Test
+	public void adicionaDepartamentoLivros() {
+
+		DepartamentoDAO departamentoDAO = new DepartamentoDAO();
+
+		Departamento d1 = new Departamento("Comercial");
+
+		Departamento d2 = new Departamento("Fincanceiro");
+
+		departamentoDAO.insereDepartamento(d1);
+		departamentoDAO.insereDepartamento(d2);
+
+	}
+
+	@Test
+	public void listaDepartamentos() {
+		List<Departamento> departamentos = departamentoDAO
+				.consultaDepartamento();
+		for (Departamento departamento : departamentos) {
+			System.out.println("Avaria Name Inseridos: "
+					+ departamento.getNome() + " = " + "cpf: "
+					+ departamento.getNome());
+		}
+	}
+
+	@Test
+	public void testLivrosDeDepartamentoesComFetchJoin() {
+		List<Departamento> departamentos = departamentoDAO.getLivrosDeDepartamentoesComFetchJoin();
+		for (Departamento departamento : departamentos) {
+			System.out.println(departamento + " e seus livros: ");
+			for (Livro livro : departamento.getLivros()) {
+				System.out.println(livro);
+			}
+			System.out.println();
+		}
+	}
+
+	@Test
+	public void testLivrosDeDepartamentoes() {
+		List<Departamento> departamentos = departamentoDAO.getLivrosDeDepartamentoes();
+		for (Departamento departamento : departamentos) {
+			System.out.println(departamento + " e seus livros: ");
+			for (Livro livro : departamento.getLivros()) {
+				System.out.println(livro);
+			}
+			System.out.println();
+		}
+	}
+
+	@Test
+	public void testeSubqueries() {
+		Livro precoL = livroDAO.testeSubqueries();
+		System.out.println(precoL);
+	}
+
+	@Test
+	public void selectWhere() {
+		Double precoMedioFilt = livroDAO.selectWhere();
+		System.out.printf("Pre�o M�dio: %.2f\n", precoMedioFilt);
+
+	}
+
+	@Test
+	public void selectComTupla() {
+		List<Tuple> resultado = livroDAO.selectComTupla();
+		for (Tuple tuple : resultado) {
+			System.out.println(tuple.get("nomeT") + " " + tuple.get("precoT"));
+		}
+
+	}
+
+	@Test
+	public void getSomaPrecos() {
+		Double total = livroDAO.getSomaPrecos();
+		System.out.printf("%.2f", total);
+
+	}
+
+	@Test
+	public void getPrecoMedio() {
+		Double precoMedio = livroDAO.getPrecoMedio();
+		System.out.println(precoMedio);
+
+	}
+
+	@Test
+	public void selectAllNomesPrecosLivros() {
+		List<Object[]> livros = livroDAO.selectAllNomesPrecosLivros();
+
+		for (Object[] livro : livros) {
+			System.out.println(livro[0] + " " + livro[1]);
+		}
+
+	}
+
+	@Test
+	public void selectAllNomesLivros() {
+		List<String> livros = livroDAO.selectAllNomesLivros();
+
+		for (String livro : livros) {
+			System.out.println(livro);
+		}
+
+	}
+
+	@Test
+	public void selectAllLivros() {
+		List<Livro> livros = livroDAO.selectAllLivros();
+
+		for (Livro livro : livros) {
+			System.out.println(livro);
+		}
+
+	}
+
+}

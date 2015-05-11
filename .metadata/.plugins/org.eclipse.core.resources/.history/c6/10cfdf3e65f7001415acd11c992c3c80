@@ -1,0 +1,249 @@
+package br.edu.unitri.aula06livro;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Tuple;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Subquery;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import br.edu.unitri.aula06livro.dao.AutorDAO;
+import br.edu.unitri.aula06livro.dao.LivroDAO;
+import br.edu.unitri.aula06livro.domain.Autor;
+import br.edu.unitri.aula06livro.domain.Livro;
+
+public class AutorLivrosTest {
+	AutorDAO autorDAO = null;
+	LivroDAO livroDAO = null;
+
+	@Before
+	public void init() {
+		autorDAO = new AutorDAO();
+		livroDAO = new LivroDAO();
+	}
+
+	@Test
+	public void adicionaAutorLivros() {
+
+		AutorDAO autorDAO = new AutorDAO();
+		LivroDAO livroDAO = new LivroDAO();
+
+		Livro livro1 = new Livro();
+		livro1.setNome("The Battle for Your Mind");
+		livro1.setPreco(20.6);
+		livroDAO.insereLivro(livro1);
+
+		Livro livro2 = new Livro();
+		livro2.setNome("Differentiate or Die");
+		livro2.setPreco(15.8);
+		livroDAO.insereLivro(livro2);
+
+		Livro livro3 = new Livro();
+		livro3.setNome("How to Transform Your Ideas");
+		livro3.setPreco(32.7);
+		livroDAO.insereLivro(livro3);
+
+		Livro livro4 = new Livro();
+		livro4.setNome("Digital Fortress");
+		livro4.setPreco(12.9);
+		livroDAO.insereLivro(livro3);
+
+		Livro livro5 = new Livro();
+		livro5.setNome("Marketing in an Era of Competition , Change and Crisis");
+		livro5.setPreco(26.8);
+		livroDAO.insereLivro(livro3);
+
+		Autor autor1 = new Autor();
+		autor1.setNome("Patrick Cullen");
+		autor1.getLivros().add(livro2);
+		autor1.getLivros().add(livro4);
+		autorDAO.insereAutor(autor1);
+
+		Autor autor2 = new Autor();
+		autor2.setNome("Fraser Seitel");
+		autor2.getLivros().add(livro3);
+		autorDAO.insereAutor(autor2);
+
+		Autor autor3 = new Autor();
+		autor3.setNome("Al Ries");
+		autor3.getLivros().add(livro1);
+		autorDAO.insereAutor(autor3);
+
+		Autor autor4 = new Autor();
+		autor4.setNome("Jack Trout");
+		autor4.getLivros().add(livro1);
+		autor4.getLivros().add(livro2);
+		autor4.getLivros().add(livro5);
+		autorDAO.insereAutor(autor4);
+
+		Autor autor5 = new Autor();
+		autor5.setNome("Steve Rivkin");
+		autor5.getLivros().add(livro2);
+		autor5.getLivros().add(livro3);
+		autor5.getLivros().add(livro5);
+		autorDAO.insereAutor(autor4);
+	}
+
+	@Test
+	private void testLivrosDeAutoresComFetchJoin(EntityManager em) {
+		List<Autor> autors = autorDAO.getLivrosDeAutoresComFetchJoin();
+		for (Autor autor : autors) {
+			System.out.println(autor + " e seus livros: ");
+			for (Livro livro : autor.getLivros()) {
+				System.out.println(livro);
+			}
+			System.out.println();
+		}
+	}
+
+	private static void testLivrosDeAutores(EntityManager em) {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Autor> qAutor = cb.createQuery(Autor.class);
+		Root<Autor> root = qAutor.from(Autor.class);
+		qAutor.select(root);
+		List<Autor> autors = em.createQuery(qAutor).getResultList();
+		for (Autor autor : autors) {
+			System.out.println(autor + " e seus livros: ");
+			for (Livro livro : autor.getLivros()) {
+				System.out.println(livro);
+			}
+			System.out.println();
+		}
+	}
+
+	private static void testeSubqueries(EntityManager em) {
+		/*
+		 * CriteriaBuilder cb = em.getCriteriaBuilder();
+		 * 
+		 * CriteriaQuery<Double> query = cb.createQuery(Double.class);
+		 * Root<Livro> livro = query.from(Livro.class);
+		 * query.select(root.<Double>get("preco")));
+		 * 
+		 * cb.isMember(livro, livro.<Editora> get(" editora ")
+		 * .<Collection<Livro>> get(" maisVendidos "));
+		 */
+
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Livro> c = cb.createQuery(Livro.class);
+		Root<Livro> livro1 = c.from(Livro.class);
+		c.select(livro1);
+		Subquery<Livro> subquery = c.subquery(Livro.class);
+		Root<Livro> livro2 = subquery.from(Livro.class);
+		subquery.select(livro2);
+		Predicate predicate = cb.greaterThan(livro2.<Double> get("preco"),
+				livro1.<Double> get("preco"));
+		subquery.where(predicate);
+		Predicate predicate2 = cb.not(cb.exists(subquery));
+		c.where(predicate2);
+		TypedQuery<Livro> tyQuery = em.createQuery(c);
+
+		Livro precoL = tyQuery.getSingleResult();
+		System.out.println(precoL);
+	}
+
+	private static void selectWhere(EntityManager em) {
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+
+		CriteriaQuery<Double> query = builder.createQuery(Double.class);
+		Root<Livro> root = query.from(Livro.class);
+		query.select(builder.avg(root.<Double> get("preco")));
+
+		Predicate predicate = builder.ge(root.<Double> get("id"), 3);
+		query.where(predicate);
+
+		Double precoMedioFilt = em.createQuery(query).getSingleResult();
+		System.out.printf("Pre�o M�dio: %.2f\n", precoMedioFilt);
+
+	}
+
+	private static void selectComTupla(EntityManager em) {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> queryMS = cb.createQuery(Tuple.class);
+		Root<Livro> rootLivro = queryMS.from(Livro.class);
+		queryMS.multiselect(rootLivro.get("nome").alias("nomeT"), rootLivro
+				.get("preco").alias("precoT"));
+		List<Tuple> resultado = em.createQuery(queryMS).getResultList();
+		for (Tuple tuple : resultado) {
+			System.out.println(tuple.get("nomeT") + " " + tuple.get("precoT"));
+		}
+
+	}
+
+	private static void getSomaPrecos(EntityManager em) {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Double> cq = cb.createQuery(Double.class);
+		Root<Livro> root = cq.from(Livro.class);
+		cq.select(cb.sum(root.<Double> get("preco")));
+
+		Double total = em.createQuery(cq).getSingleResult();
+		System.out.printf("%.2f", total);
+
+	}
+
+	private static void getPrecoMedio(EntityManager em) {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Double> cq = cb.createQuery(Double.class);
+		Root<Livro> root = cq.from(Livro.class);
+		cq.select(cb.avg(root.<Double> get("preco")));
+
+		Double precoMedio = em.createQuery(cq).getSingleResult();
+		System.out.println(precoMedio);
+
+	}
+
+	private static void selectAllNomesPrecosLivros(EntityManager em) {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
+
+		Root<Livro> root = cq.from(Livro.class);
+		cq.multiselect(root.<String> get("nome"), root.<Double> get("preco"));
+
+		TypedQuery<Object[]> query = em.createQuery(cq);
+		List<Object[]> livros = query.getResultList();
+
+		for (Object[] livro : livros) {
+			System.out.println(livro[0] + " " + livro[1]);
+		}
+
+	}
+
+	private static void selectAllNomesLivros(EntityManager em) {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<String> cq = cb.createQuery(String.class);
+
+		Root<Livro> root = cq.from(Livro.class);
+		cq.select(root.<String> get("nome"));
+
+		TypedQuery<String> query = em.createQuery(cq);
+		List<String> livros = query.getResultList();
+
+		for (String livro : livros) {
+			System.out.println(livro);
+		}
+
+	}
+
+	private static void selectAllLivros(EntityManager em) {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Livro> cq = cb.createQuery(Livro.class);
+
+		Root<Livro> root = cq.from(Livro.class);
+		cq.select(root);
+
+		TypedQuery<Livro> query = em.createQuery(cq);
+		List<Livro> livros = query.getResultList();
+
+		for (Livro livro : livros) {
+			System.out.println(livro);
+		}
+
+	}
+
+}

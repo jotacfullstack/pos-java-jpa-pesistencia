@@ -1,0 +1,20 @@
+package br.edu.unitri.aula03locacao.domain;
+
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="tb_funcionario")
+public class Funcionario implements Serializable {
+
+	private static final long serialVersionUID = 4318722629913784163L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	private String nome;
+	private String matricula;
+}

@@ -1,0 +1,31 @@
+package br.edu.unitri.projectmanager.domain;
+
+import java.io.Serializable;
+
+import javax.persistence.ManyToOne;
+
+public class ProjetoPorEmpregadoPK implements Serializable {
+
+	@ManyToOne
+	private Empregado empregado;
+
+	@ManyToOne
+	private Projeto projeto;
+
+	public Empregado getEmpregado() {
+		return empregado;
+	}
+
+	public void setEmpregado(Empregado empregado) {
+		this.empregado = empregado;
+	}
+
+	public Projeto getProjeto() {
+		return projeto;
+	}
+
+	public void setProjeto(Projeto projeto) {
+		this.projeto = projeto;
+	}
+
+}

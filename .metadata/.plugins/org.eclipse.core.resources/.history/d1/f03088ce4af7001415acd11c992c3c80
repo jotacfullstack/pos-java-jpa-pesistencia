@@ -1,0 +1,18 @@
+package br.edu.unitri.aula03livro.domain;
+
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+
+@Entity
+public class PessaoFisica extends Pessoa implements Serializable {
+	private String cpf;
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+}

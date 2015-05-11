@@ -1,0 +1,74 @@
+package br.edu.unitri.aula04fornecedor;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import br.edu.unitri.aula05fornecedor.dao.FornecedorDAO;
+import br.edu.unitri.aula05fornecedor.dao.FornecedorFisicaDAO;
+import br.edu.unitri.aula05fornecedor.dao.FornecedorJuridicaDAO;
+import br.edu.unitri.aula05fornecedor.domain.Endereco;
+import br.edu.unitri.aula05fornecedor.domain.Fornecedor;
+import br.edu.unitri.aula05fornecedor.domain.FornecedorFisica;
+import br.edu.unitri.aula05fornecedor.domain.FornecedorJuridica;
+
+public class GerenciarFornecedoresTest {
+	FornecedorDAO fornecedorDAO = null;
+	FornecedorJuridicaDAO fornecedorJuridicaDAO = null;
+	FornecedorFisicaDAO fornecedorFisicaDAO = null;
+
+	@Before
+	public void init() {
+		fornecedorDAO = new FornecedorDAO();
+		fornecedorJuridicaDAO = new FornecedorJuridicaDAO();
+		fornecedorFisicaDAO = new FornecedorFisicaDAO();
+	}
+
+	@Test
+	public void adicionaFornecedorFisica() {
+
+		FornecedorFisica fornecedorFisica = new FornecedorFisica();
+		fornecedorFisica.setNome("Fulano");
+		fornecedorFisica.setCpf("111.222.333-44");
+		fornecedorFisicaDAO.insereFornecedorFisica(fornecedorFisica);
+
+	}
+
+	@Test
+	public void insertPJ() {
+
+		FornecedorJuridica fornecedorJuridica = new FornecedorJuridica();
+		fornecedorJuridica.setNome("Empresa");
+		fornecedorJuridica.setCnpj("11.444.777/0001-61");
+		fornecedorJuridicaDAO.insereFornecedorJuridica(fornecedorJuridica);
+
+	}
+
+	@Test
+	public void insert() {
+		Fornecedor fornecedor = new Fornecedor();
+		fornecedor.setNome("Bla");
+		fornecedorDAO.insereFornecedor(fornecedor);
+	}
+
+	@Test
+	public void insertComEndereco() {
+		Fornecedor fornecedor = new Fornecedor();
+		fornecedor.setNome("Bla");
+		Endereco endereco = new Endereco("Brasil", "Estado", "Cidade",
+				" Lograduro", 1232, "complemento", 234234534);
+		fornecedor.setEndereco(endereco);
+		fornecedorDAO.insereFornecedor(fornecedor);
+	}
+
+	@Test
+	public void findFornecedor() {
+
+		Fornecedor fornecedor = fornecedorDAO.findById(1l);
+		FornecedorFisica fornecedorFisica = fornecedorFisicaDAO.findById(1l);
+		FornecedorJuridica fornecedorJuridica = fornecedorJuridicaDAO.findById(1l);
+
+		System.out.println("OK!! " + fornecedor);
+		System.out.println("OK!! " + fornecedorFisica);
+		System.out.println("OK!! " + fornecedorJuridica);
+	}
+}

@@ -1,0 +1,36 @@
+package aula02produto;
+
+import br.edu.unitri.aula02produto.dao.FornecedorDAO;
+import br.edu.unitri.aula02produto.domain.Fornecedor;
+import br.edu.unitri.aula02produto.domain.Produto;
+
+public class JPAManagerTest {
+
+	FornecedorDAO dao = null;
+	
+	public JPAManagerTest() {
+		
+	}
+	
+	public static void main(String args[]) {
+		dao = new FornecedorDAO();
+		Fornecedor f1 = new Fornecedor("Alpargatas");
+		Fornecedor f2 = new Fornecedor("Unilever");
+		Fornecedor f3 = new Fornecedor("Sadia");
+		Fornecedor f4 = new Fornecedor("Perdigão");
+
+		dao.insereFornecedor(f1);
+		dao.insereFornecedor(f2);
+		dao.insereFornecedor(f3);
+		dao.insereFornecedor(f4);
+
+		persist(new Produto("havaianas top", f1));
+		persist(new Produto("havaianas color", f1));
+		persist(new Produto("linguiça toscana", f3));
+
+		consultaFornedorByJpaQl();
+		consultaFornedorByCriteria();
+		consultaFornedorBySQLNativo();
+
+	}
+}

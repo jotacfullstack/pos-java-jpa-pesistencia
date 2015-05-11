@@ -1,0 +1,33 @@
+package teste;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import domain.Fornecedor;
+import domain.Produto;
+
+public class PopulaDados {
+	public static void main(String args[]) {
+		EntityManagerFactory emf = Persistence
+				.createEntityManagerFactory("PosJava-ProjetoJPA");
+		EntityManager em = emf.createEntityManager();
+		populaFornecedores(em);
+	}
+
+	private static void populaFornecedores(EntityManager em) {
+		Fornecedor f1 = new Fornecedor("Alpargatas");
+		Fornecedor f2 = new Fornecedor("Unilever");
+		Fornecedor f3 = new Fornecedor("Sadia");
+		Fornecedor f4 = new Fornecedor("Perdigão");
+		em.getTransaction().begin();
+		em.persist(f1);
+		em.persist(f2);
+		em.persist(f3);
+		em.persist(f4);
+		em.persist(new Produto("havaianas top", f1));
+		em.persist(new Produto("havaianas color", f1));
+		em.persist(new Produto("linguiça toscana", f3));
+		em.getTransaction().commit();
+	}
+}

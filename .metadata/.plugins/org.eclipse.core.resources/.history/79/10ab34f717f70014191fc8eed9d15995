@@ -1,0 +1,10 @@
+package br.edu.unitri.aula03locacao.domain;
+
+public class Locacao {
+cliente
+veiculo
+funcionario_rec
+funcionario_cad
+qtd_dias
+kilometragem
+}

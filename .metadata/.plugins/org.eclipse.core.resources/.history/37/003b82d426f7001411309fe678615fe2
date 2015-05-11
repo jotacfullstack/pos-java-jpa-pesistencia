@@ -1,0 +1,60 @@
+package br.edu.unitri.aula03locacao;
+
+import java.util.List;
+
+import br.edu.unitri.aula03locacao.dao.AvariaDAO;
+import br.edu.unitri.aula03locacao.domain.Avaria;
+import br.edu.unitri.aula03locacao.domain.Cliente;
+import br.edu.unitri.aula03locacao.domain.Funcionario;
+import br.edu.unitri.aula03locacao.domain.Locacao;
+import br.edu.unitri.aula03locacao.domain.Veiculo;
+import br.edu.unitri.aula03locacao.domain.VeiculoCategoria;
+
+public class AvariaTest {
+	public static void main(String args[]) {
+		AvariaDAO avariaDAO = new AvariaDAO();
+		
+		Cliente cliente = new Cliente("José", "2345234534");
+
+		VeiculoCategoria veiculoCategoria = new VeiculoCategoria(12d,
+				"Comercial");
+
+		Veiculo veiculo = new Veiculo("fiesta", "Ford", 323d, veiculoCategoria);
+		
+		Funcionario funcionarioRec = new Funcionario("Antonio", "2345234534");
+		Funcionario funcionarioCad = new Funcionario("Joana", "2345234534");
+
+		Locacao l1 = new Locacao(cliente, veiculo, funcionarioRec,
+				funcionarioCad, 120, 120000);
+
+		Avaria c1 = new Avaria(12d, "batida", l1);
+		Avaria c2 = new Avaria(32d, "raspada", l1);
+		Avaria c3 = new Avaria(323d, "quebra", l1);
+		Avaria c4 = new Avaria(3d, "das", l1);
+
+		avariaDAO.insereAvaria(c1);
+		avariaDAO.insereAvaria(c2);
+		avariaDAO.insereAvaria(c3);
+		avariaDAO.insereAvaria(c4);
+		
+		List<Avaria> avarias = avariaDAO.consultaAvaria();
+		for (Avaria avaria : avarias) {
+			System.out.println("Avaria Name Inseridos: " + avaria.getNome() + " = "
+					+ "cpf: " + avaria.getCpf());
+		}
+		
+		Avaria result = avariaDAO.consultaAvariaPorId(1l);
+		result.setNome("Maria Guilhermina");
+		
+		avariaDAO.alteraAvaria(result);
+		
+		Avaria remove = avariaDAO.consultaAvariaPorId(3l);
+		avariaDAO.deleteAvaria(remove);
+		
+		List<Avaria> avariasAlterados = avariaDAO.consultaAvaria();
+		for (Avaria avaria : avariasAlterados) {
+			System.out.println("Avaria Name alterados: " + avaria.getNome() + " = "
+					+ "cpf: " + avaria.getCpf());
+		}
+	}
+}

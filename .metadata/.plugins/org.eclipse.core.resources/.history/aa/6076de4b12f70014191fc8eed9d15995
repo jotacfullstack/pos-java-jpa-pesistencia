@@ -1,0 +1,5 @@
+package br.edu.unitri.aula02produto.dao;
+
+public class ProdutoDAO {
+
+}

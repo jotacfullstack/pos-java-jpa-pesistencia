@@ -1,0 +1,7 @@
+package br.edu.unitri.projectmanager.domain;
+
+import java.io.Serializable;
+
+public class LocalPorDeportamento implements Serializable {
+
+}

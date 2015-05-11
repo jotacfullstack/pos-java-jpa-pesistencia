@@ -1,0 +1,82 @@
+package br.edu.unitri.aula05fornecedor.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+
+import br.edu.unitri.aula05fornecedor.domain.Fornecedor;
+import br.edu.unitri.aula05fornecedor.util.JPAUtil;
+
+public class FornecedorDAO {
+	EntityManager manager = null;
+
+	public FornecedorDAO() {
+		manager = new JPAUtil().getEntityManager();
+
+	}
+
+	public void insereFornecedor(Fornecedor fornecedor) {
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+		manager.persist(fornecedor);
+		tx.commit();
+	}
+
+	public Fornecedor findById(Integer id) {
+		return manager.find(Fornecedor.class, id);
+	}
+
+	public List<Fornecedor> consultaFornedorByJpaQl() {
+		TypedQuery<Fornecedor> query = manager.createQuery(
+				"Select f from Fornecedor f", Fornecedor.class);
+		return query.getResultList();
+	}
+
+	public List<Fornecedor> consultaFornedorByCriteria() {
+		CriteriaBuilder cb = manager.getCriteriaBuilder();
+		CriteriaQuery<Fornecedor> cq = cb.createQuery(Fornecedor.class);
+		return manager.createQuery(cq).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Fornecedor> consultaFornedorBySQLNativo() {
+		Query q = manager.createNativeQuery("Select * from tb_fornecedor",
+				Fornecedor.class);
+		return q.getResultList();
+	}
+	
+	private static void consultaJpaQl(EntityManager em) {
+		TypedQuery<Fornecedor> query = em.createQuery("Select f from Fornecedor f", Fornecedor.class);
+		List<Fornecedor> fornecedors = query.getResultList();
+		for(Fornecedor fornecedor: fornecedors) {
+			System.out.println(fornecedor);
+		}
+	}
+
+	private static void consultaCriteria(EntityManager em) {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Fornecedor> cq = cb.createQuery(Fornecedor.class);
+		//Root<Fornecedor> root = cq.from(Fornecedor.class);
+		List<Fornecedor> retorno = em.createQuery(cq)
+				.getResultList();
+		System.out.println("fornecedores em Criteria");
+		for(Fornecedor fornecedor: retorno) {
+			System.out.println(fornecedor);
+		}
+	}
+
+	private static void consultaSQL(EntityManager em) {
+		Query q = em.createNativeQuery("Select * from tbFornecedor",
+				Fornecedor.class);
+		List<Fornecedor> retorno = q.getResultList();
+		System.out.println("fornecedores em SQL");
+		// retorno.forEach((e) -> System.out.println(e));
+		for(Fornecedor fornecedor: retorno) {
+			System.out.println(fornecedor);
+		}
+}

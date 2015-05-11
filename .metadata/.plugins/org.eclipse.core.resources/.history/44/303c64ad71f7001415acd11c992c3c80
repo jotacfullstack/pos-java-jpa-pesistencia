@@ -1,0 +1,16 @@
+package br.edu.unitri.projectmanager.domain;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+
+public class GerenciaPK implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Column(name = "cod_empregado", nullable = false)
+	private Long codEmpregado;
+
+	@Column(name = "num_departamento", nullable = false)
+	private Long numDepartamento;
+}

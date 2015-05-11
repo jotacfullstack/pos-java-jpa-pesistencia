@@ -1,0 +1,60 @@
+package br.edu.unitri.projectmanager.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
+import br.edu.unitri.aula05fornecedor.domain.Fornecedor;
+import br.edu.unitri.projectmanager.domain.Departamento;
+import br.edu.unitri.projectmanager.util.JPAUtil;
+
+public class DepartamentoDAO {
+	EntityManager manager = null;
+
+	public DepartamentoDAO() {
+		manager = new JPAUtil().getEntityManager();
+
+	}
+
+	public void insereDepartamento(Departamento departamento) {
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+		manager.persist(departamento);
+		tx.commit();
+	}
+
+	public void alteraDepartamento(Departamento departamento) {
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+		manager.merge(departamento);
+		tx.commit();
+	}
+
+	public void deleteDepartamento(Departamento departamento) {
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+		manager.remove(departamento);
+		tx.commit();
+	}
+
+	public Departamento consultaDepartamentoPorId(Long id) {
+		return manager.find(Departamento.class, id);
+	}
+
+	public List<Departamento> consultaDepartamento() {
+		TypedQuery<Departamento> query = manager.createQuery(
+				"Select f from Departamento f", Departamento.class);
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Fornecedor> consultaJpaQl_Par(Integer codigo) {
+		Query q = manager.createQuery(
+				"Select f from Fornecedor f where f.codigo = :codigo",
+				Fornecedor.class);
+		return q.setParameter("codigo", codigo).getResultList();
+	}
+}

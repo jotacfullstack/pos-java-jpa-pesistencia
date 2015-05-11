@@ -1,0 +1,28 @@
+package br.edu.unitri.aula05fornecedor.teste;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+
+import br.edu.unitri.aula05fornecedor.domain.Fornecedor;
+
+public class ConsultasBasicas {
+	public static void main(String args[]) {
+		EntityManagerFactory emf = Persistence
+				.createEntityManagerFactory("PosJava-ProjetoJPA");
+		EntityManager em = emf.createEntityManager();
+		//consultaJpaQl(em);
+		consultaCriteria(em);
+		//consultaSQL(em);
+		emf.close();
+	}
+
+	
+	}
+}

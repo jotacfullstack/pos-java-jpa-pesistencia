@@ -1,0 +1,5 @@
+package br.edu.unitri.projectmanager.domain;
+
+public class Gerencia {
+
+}

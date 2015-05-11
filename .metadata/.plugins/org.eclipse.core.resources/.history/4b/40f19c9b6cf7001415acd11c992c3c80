@@ -1,0 +1,53 @@
+package br.edu.unitri.projectmanager.domain;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class ProjetoPorEmpregado {
+
+	@Id
+	private Long id;
+
+	@ManyToOne
+	private Empregado empregado;
+
+	@ManyToOne
+	private Projeto projeto;
+	
+	@Column(name="quantidade_horas")
+	private int quantidadeHoras;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Empregado getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Empregado employee) {
+		this.employee = employee;
+	}
+
+	public Projeto getProject() {
+		return project;
+	}
+
+	public void setProject(Projeto project) {
+		this.project = project;
+	}
+
+	@Override
+	public String toString() {
+		return "ProjectByEmployee [id=" + id + ", employee=" + employee
+				+ ", project=" + project + "]";
+	}
+
+}

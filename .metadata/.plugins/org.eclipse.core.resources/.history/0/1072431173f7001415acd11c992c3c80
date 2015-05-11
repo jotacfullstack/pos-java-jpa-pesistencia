@@ -1,0 +1,24 @@
+package br.edu.unitri.projectmanager.domain;
+
+import java.util.List;
+
+import br.edu.unitri.projectmanager.dao.DepartamentoDAO;
+
+public class DepartamentoTest {
+	public static void main(String args[]) {
+		DepartamentoDAO departamentoDAO = new DepartamentoDAO();
+
+		Departamento d1 = new Departamento("Comercial");
+
+		Departamento d2 = new Departamento("Fincanceiro");
+
+		departamentoDAO.insereDepartamento(d1);
+		departamentoDAO.insereDepartamento(d2);
+
+		List<Departamento> departamentos = departamentoDAO.consultaDepartamento();
+		for (Departamento departamento : departamentos) {
+			System.out.println("Avaria Name Inseridos: " + departamento.getNome()
+					+ " = " + "cpf: " + departamento.getDescricao());
+		}
+	}
+}

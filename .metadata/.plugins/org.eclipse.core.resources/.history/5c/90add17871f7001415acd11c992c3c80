@@ -1,0 +1,14 @@
+package br.edu.unitri.projectmanager.domain;
+
+import java.io.Serializable;
+
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+
+@Entity
+public class Gerencia implements Serializable {
+
+	private static final long serialVersionUID = -6314803202591668953L;
+	@EmbeddedId
+	private GerenciaPK id;
+}

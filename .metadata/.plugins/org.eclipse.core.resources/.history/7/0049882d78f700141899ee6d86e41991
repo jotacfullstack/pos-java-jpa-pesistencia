@@ -1,0 +1,43 @@
+package br.edu.unitri.projectmanager;
+
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import br.edu.unitri.projectmanager.dao.DepartamentoDAO;
+import br.edu.unitri.projectmanager.dao.DependenteDAO;
+import br.edu.unitri.projectmanager.domain.Departamento;
+import br.edu.unitri.projectmanager.domain.Dependente;
+
+public class DependenteTest {
+	DependenteDAO dependenteDAO = null;
+	DepartamentoDAO departamentoDAO = null;
+
+	@Before
+	public void init() {
+		dependenteDAO = new DependenteDAO();
+		departamentoDAO = new DepartamentoDAO();
+	}
+
+	@Test
+	public void adicionaDependenteDependentes() {
+		Departamento departamento = departamentoDAO
+				.consultaDepartamentoPorId(1l);
+		DependenteDAO dependenteDAO = new DependenteDAO();
+		Dependente d1 = new Dependente("Comercial", departamento);
+		Dependente d2 = new Dependente("Fincanceiro", departamento);
+		dependenteDAO.insereDependente(d1);
+		dependenteDAO.insereDependente(d2);
+	}
+
+	@Test
+	public void listaDependentes() {
+		List<Dependente> dependentes = dependenteDAO.consultaDependente();
+		for (Dependente dependente : dependentes) {
+			System.out.println("Avaria Name Inseridos: " + dependente.getNome()
+					+ " = " + "cpf: " + dependente.getNome());
+		}
+	}
+
+}

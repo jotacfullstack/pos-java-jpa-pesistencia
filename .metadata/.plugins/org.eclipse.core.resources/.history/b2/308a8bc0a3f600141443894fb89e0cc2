@@ -1,0 +1,15 @@
+package br.com.psi.jpa;
+
+import br.com.psi.dao.DepartmentDAO;
+
+
+public class JpaTest {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		DepartmentDAO dao = new DepartmentDAO();
+	}
+
+}

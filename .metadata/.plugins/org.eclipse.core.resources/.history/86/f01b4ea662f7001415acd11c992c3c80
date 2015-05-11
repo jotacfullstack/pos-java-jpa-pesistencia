@@ -1,0 +1,147 @@
+package teste;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import domain.Fornecedor;
+import domain.ProdFornVO;
+import domain.Produto;
+
+public class ConsultasBasicas {
+	public static void main(String args[]) {
+		EntityManagerFactory emf = Persistence
+				.createEntityManagerFactory("PosJava-ProjetoJPA");
+		EntityManager em = emf.createEntityManager();
+		// consultaJpaQlNamed(em);
+		// consultaCriteria(em);
+		// consultaSQL(em);
+		// consultaMax(em);
+		 resultComplex(em);
+		// paginacao(em);
+		//problMaisUmResolvido(em);
+		emf.close();
+	}
+
+	private static void problMaisUmResolvido(EntityManager em) {
+		// SELECT DISTINCT (d) FROM Departamento d LEFT JOIN FETCH d.
+		// funcionarios
+		TypedQuery<Fornecedor> query = em
+				.createQuery(
+						"Select distinct(f) from Fornecedor f left join fetch f.produtos",
+						Fornecedor.class);
+		List<Fornecedor> fornecedors = query.getResultList();
+		for (Fornecedor forn : fornecedors) {
+			System.out.println("fornecedor: " + forn.getNome());
+			for (Produto produto : forn.getProdutos()) {
+				System.out.println(produto);
+			}
+		}
+	}
+
+	private static void problMaisUm(EntityManager em) {
+		TypedQuery<Fornecedor> query = em.createQuery(
+				"Select f from Fornecedor f", Fornecedor.class);
+		List<Fornecedor> fornecedors = query.getResultList();
+		for (Fornecedor forn : fornecedors) {
+			System.out.println("fornecedor: " + forn.getNome());
+			for (Produto produto : forn.getProdutos()) {
+				System.out.println(produto);
+			}
+		}
+	}
+
+	private static void paginacao(EntityManager em) {
+		TypedQuery<Produto> q = em.createQuery("select p from Produto p",
+				Produto.class);
+		q.setFirstResult(1);
+		q.setMaxResults(2);
+		List<Produto> produtos = q.getResultList();
+		for (Produto produto : produtos) {
+			System.out.println(produto);
+		}
+	}
+
+	private static void resultComplex2(EntityManager em) {
+		String jpaql = "Select new domain.ProdFornVO(p.descricao, p.fornecedor.nome) from Produto p";
+		TypedQuery<ProdFornVO> query = em.createQuery(jpaql, ProdFornVO.class);
+		List<ProdFornVO> lista = query.getResultList();
+		for (ProdFornVO fornVO : lista) {
+			System.out.println(fornVO);
+		}
+	}
+
+	private static void resultComplex(EntityManager em) {
+		String jpaql = "Select upper(p.descricao), p.fornecedor.nome from Produto p";
+		Query query = em.createQuery(jpaql);
+		List<Object[]> lista = query.getResultList();
+		for (Object[] tupla : lista) {
+			System.out.println(" Produto : " + tupla[0]);
+			System.out.println(" Fornecedor : " + tupla[1]);
+			System.out.println();
+		}
+	}
+
+	private static void consultaMax(EntityManager em) {
+		TypedQuery<Integer> q = em.createQuery(
+				"select max(f.codigo) from Fornecedor f", Integer.class);
+		Integer retorno = (Integer) q.getSingleResult();
+		System.out.println("Maior Codigo fornecedor " + retorno);
+	}
+
+	private static void consultaJpaQlNamed(EntityManager em) {
+		// Fornecedor fornecedor = new Fornecedor();
+		// fornecedor.setCodigo(1);
+		TypedQuery<Produto> query = em.createNamedQuery(
+				"buscaProdutosPorFornecedorJpa2", Produto.class);
+		List<Produto> produtos = query.setParameter("fornecedor", 1)
+				.getResultList();
+		for (Produto produto : produtos) {
+			System.out.println(produto);
+		}
+
+	}
+
+	private static void consultaJpaQl(EntityManager em) {
+		TypedQuery<Fornecedor> query = em
+				.createQuery(
+						"Select f from Fornecedor f where f.codigo = :codigo or f.nome = :nome",
+						Fornecedor.class);
+		List<Fornecedor> fornecedors = query.setParameter("codigo", 1)
+				.setParameter("nome", "Sadia").getResultList();
+		for (Fornecedor fornecedor : fornecedors) {
+			System.out.println(fornecedor);
+		}
+	}
+
+	private static void consultaCriteria(EntityManager em) {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Fornecedor> cq = cb.createQuery(Fornecedor.class);
+		// Root<Fornecedor> root = cq.from(Fornecedor.class);
+		List<Fornecedor> retorno = em.createQuery(cq).getResultList();
+		System.out.println("fornecedores em Criteria");
+		for (Fornecedor fornecedor : retorno) {
+			System.out.println(fornecedor);
+		}
+	}
+
+	private static void consultaSQL(EntityManager em) { // parâmetro nomeado
+		Query q = em
+				.createNativeQuery(
+						"Select * from tbFornecedor where codfrn = ?",
+						Fornecedor.class);
+		List<Fornecedor> retorno = q.setParameter(1, 2).getResultList();
+		System.out.println("fornecedores em SQL");
+		// retorno.forEach((e) -> System.out.println(e));
+		for (Fornecedor fornecedor : retorno) {
+			System.out.println(fornecedor);
+		}
+	}
+}

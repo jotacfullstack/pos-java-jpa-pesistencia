@@ -1,0 +1,52 @@
+package br.edu.unitri.aula03livro.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+
+import br.edu.unitri.aula03livro.domain.Estado;
+import br.edu.unitri.aula03livro.util.JPAUtil;
+
+public class EstadoDAO {
+	EntityManager manager = null;
+
+	public EstadoDAO() {
+		manager = new JPAUtil().getEntityManager();
+
+	}
+
+	public void insereAutor(Estado autor) {
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+		manager.persist(autor);
+		tx.commit();
+	}
+
+	public Estado buscaPorId(Long id) {
+		return manager.find(Estado.class, id);
+	}
+	
+	public List<Estado> consultaFornedorByJpaQl() {
+		TypedQuery<Estado> query = manager.createQuery(
+				"Select f from Autor f", Estado.class);
+		return query.getResultList();
+	}
+
+	public List<Estado> consultaFornedorByCriteria() {
+		CriteriaBuilder cb = manager.getCriteriaBuilder();
+		CriteriaQuery<Estado> cq = cb.createQuery(Estado.class);
+		return manager.createQuery(cq).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Estado> consultaFornedorBySQLNativo() {
+		Query q = manager.createNativeQuery("Select * from tb_autor",
+				Estado.class);
+		return q.getResultList();
+	}
+}

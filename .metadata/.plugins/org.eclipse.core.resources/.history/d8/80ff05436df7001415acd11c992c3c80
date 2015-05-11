@@ -1,0 +1,25 @@
+package br.edu.unitri.projectmanager.domain;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class ProjetoPorEmpregado {
+
+	@EmbeddedId
+	private ProjetoPorEmpregadoPK id;
+
+	@Column(name = "quantidade_horas")
+	private int quantidadeHoras;
+
+	public int getQuantidadeHoras() {
+		return quantidadeHoras;
+	}
+
+	public void setQuantidadeHoras(int quantidadeHoras) {
+		this.quantidadeHoras = quantidadeHoras;
+	}
+
+}

@@ -1,0 +1,38 @@
+package br.edu.unitri.aula03governador;
+
+import java.util.ArrayList;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import br.edu.unitri.aula03governador.dao.EstadoDAO;
+import br.edu.unitri.aula03governador.dao.LivroDAO;
+import br.edu.unitri.aula03governador.domain.Estado;
+import br.edu.unitri.aula03governador.domain.Governador;
+
+public class GovernadorPorEstadoTest {
+	EstadoDAO estadoDAO = null;
+	GovernadorDAO governadorDAO = null;
+
+	@Before
+	public void init() {
+		autorDAO = new EstadoDAO();
+		livroDAO = new LivroDAO();
+	}
+
+	@Test
+	public void adicionaAutorLivros() {
+
+		Estado autor = new Estado();
+		autor.setNome("Felipa");
+		autorDAO.insereAutor(autor);
+		Estado autorResult = autorDAO.buscaPorId(autor.getId());
+				
+		Governador livro = new Governador();
+		livro.setNome("Testes de JPA2");
+		livro.setAutores(new ArrayList<Estado>());
+		livro.getAutores().add(autorResult);
+
+		livroDAO.insereLivro(livro);
+	}
+}

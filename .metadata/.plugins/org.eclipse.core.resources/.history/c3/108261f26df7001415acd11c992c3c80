@@ -1,0 +1,13 @@
+package br.edu.unitri.projectmanager.domain;
+
+import java.io.Serializable;
+
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class LocalPorDeportamentoPK implements Serializable {
+
+	private Local local;
+	private Departamento departamento;
+
+}

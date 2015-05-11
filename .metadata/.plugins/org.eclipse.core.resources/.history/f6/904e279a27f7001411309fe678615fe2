@@ -1,0 +1,84 @@
+package br.edu.unitri.aula03locacao.domain;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tb_funcionario")
+public class Funcionario implements Serializable {
+
+	private static final long serialVersionUID = 4318722629913784163L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	@Column(name = "FUNNAME")
+	private String nome;
+	private String matricula;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "funcionarioRec", cascade = CascadeType.PERSIST)
+	private List<Funcionario> funcionarioRecs;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "funcionarioCad", cascade = CascadeType.PERSIST)
+	private List<Funcionario> funcionarioCads;
+
+	public Funcionario() {
+		super();
+	}
+
+	public Funcionario(String nome, String matricula) {
+		super();
+		this.nome = nome;
+		this.matricula = matricula;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+
+	public List<Funcionario> getFuncionarioRecs() {
+		return funcionarioRecs;
+	}
+
+	public void setFuncionarioRecs(List<Funcionario> funcionarioRecs) {
+		this.funcionarioRecs = funcionarioRecs;
+	}
+
+	public List<Funcionario> getFuncionarioCads() {
+		return funcionarioCads;
+	}
+
+	public void setFuncionarioCads(List<Funcionario> funcionarioCads) {
+		this.funcionarioCads = funcionarioCads;
+	}
+
+}

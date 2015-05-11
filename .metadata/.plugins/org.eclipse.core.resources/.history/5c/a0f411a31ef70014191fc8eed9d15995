@@ -1,0 +1,96 @@
+package br.edu.unitri.aula03locacao.domain;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tb_cliente")
+public class Locacao {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+
+	@ManyToOne
+	@JoinColumn(name = "cliente_id")
+	private Cliente cliente;
+
+	@ManyToOne
+	@JoinColumn(name = "veiculo_id")
+	private Veiculo veiculo;
+
+	@ManyToOne
+	@JoinColumn(name = "funcionario_rec_id")
+	private Funcionario funcionarioRec;
+
+	@ManyToOne
+	@JoinColumn(name = "funcionario_cad_id")
+	private Funcionario funcionarioCad;
+
+	@Column(name = "qtd_dias")
+	private int quantidadeDias;
+
+	private int kilometragem;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}
+
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
+	}
+
+	public Funcionario getFuncionarioRec() {
+		return funcionarioRec;
+	}
+
+	public void setFuncionarioRec(Funcionario funcionarioRec) {
+		this.funcionarioRec = funcionarioRec;
+	}
+
+	public Funcionario getFuncionarioCad() {
+		return funcionarioCad;
+	}
+
+	public void setFuncionarioCad(Funcionario funcionarioCad) {
+		this.funcionarioCad = funcionarioCad;
+	}
+
+	public int getQuantidadeDias() {
+		return quantidadeDias;
+	}
+
+	public void setQuantidadeDias(int quantidadeDias) {
+		this.quantidadeDias = quantidadeDias;
+	}
+
+	public int getKilometragem() {
+		return kilometragem;
+	}
+
+	public void setKilometragem(int kilometragem) {
+		this.kilometragem = kilometragem;
+	}
+
+}

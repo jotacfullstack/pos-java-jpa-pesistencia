@@ -1,0 +1,32 @@
+package br.edu.unitri.aula05fornecedor.teste;
+
+import br.edu.unitri.aula04pessoa.domain.Fornecedor;
+import br.edu.unitri.aula04pessoa.domain.Produto;
+import br.edu.unitri.aula05fornecedor.dao.FornecedorDAO;
+import br.edu.unitri.aula05fornecedor.dao.ProdutoDAO;
+
+public class PopulaDados {
+	public static void main(String args[]) {
+		populaFornecedores();
+	}
+
+	private static void populaFornecedores() {
+		FornecedorDAO fornecedorDAO = new FornecedorDAO();
+
+		Fornecedor f1 = new Fornecedor("Alpargatas");
+		Fornecedor f2 = new Fornecedor("Unilever");
+		Fornecedor f3 = new Fornecedor("Sadia");
+		Fornecedor f4 = new Fornecedor("Perdig�o");
+
+		fornecedorDAO.insereFornecedor(f1);
+		fornecedorDAO.insereFornecedor(f2);
+		fornecedorDAO.insereFornecedor(f3);
+		fornecedorDAO.insereFornecedor(f4);
+
+		ProdutoDAO produtoDAO = new ProdutoDAO();
+		produtoDAO.insereProduto(new Produto("havaianas top", f1));
+		produtoDAO.insereProduto(new Produto("havaianas color", f2));
+		produtoDAO.insereProduto(new Produto("lingui�a toscana", f3));
+		produtoDAO.insereProduto(new Produto("havaianas top", f4));
+	}
+}

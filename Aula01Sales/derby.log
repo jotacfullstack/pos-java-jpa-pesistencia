@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Sat May 09 17:12:36 BRT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-014d-3a4e-d59e-00000374c3f8 
+on database directory memory:/Users/rogeriofontes/Documents/workspace-pos-java-persistencia/Aula01Sales/posjava-aula02 with class loader sun.misc.Launcher$AppClassLoader@23137792 
+Loaded from file:/Users/rogeriofontes/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_45-b18
+user.dir=/Users/rogeriofontes/Documents/workspace-pos-java-persistencia/Aula01Sales
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.9.5
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

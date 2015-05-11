@@ -1,0 +1,27 @@
+package br.edu.unitri.aula03locacao;
+
+import java.util.List;
+
+import br.edu.unitri.aula03locacao.dao.DepartamentoDAO;
+import br.edu.unitri.aula03locacao.domain.Departamento;
+
+public class DepartamentoTest {
+	public static void main(String args[]) {
+		DepartamentoDAO veiculoCategoriaDAO = new DepartamentoDAO();
+
+		Departamento veiculoCategoria = new Departamento(12d,
+				"Comercial");
+
+		Departamento veiculoCategoria1 = new Departamento(12d,
+				"utilitario");
+
+		veiculoCategoriaDAO.insereDepartamento(veiculoCategoria);
+		veiculoCategoriaDAO.insereDepartamento(veiculoCategoria1);
+
+		List<Departamento> categorias = veiculoCategoriaDAO.consultaDepartamento();
+		for (Departamento categoria : categorias) {
+			System.out.println("Avaria Name Inseridos: " + categoria.getDescricao()
+					+ " = " + "cpf: " + categoria.getPrecoBase());
+		}
+	}
+}

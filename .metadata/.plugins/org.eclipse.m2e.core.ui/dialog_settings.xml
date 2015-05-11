@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="MavenProjectWizardArtifactPage">
+		<list key="groupId">
+			<item value="br.edu.unitri.aula06livro"/>
+			<item value="br.edu.unitri.aula05fornecedor"/>
+			<item value="br.edu.unitri.aula03pessoa"/>
+			<item value="br.edu.unitri.aula03governador"/>
+			<item value="br.edu.unitri.aula03livro"/>
+			<item value="br.edu.unitri.aula03locacao"/>
+			<item value="br.edu.unitri.projectmanager"/>
+			<item value="br.edu.unitri.aula01sale"/>
+			<item value="br.edu.unitri.aula01jdbc"/>
+			<item value="br.edu.unitri.aula01jpa"/>
+		</list>
+		<list key="name">
+		</list>
+		<list key="artifactId">
+			<item value="aula06livro"/>
+			<item value="aula05fornecedor"/>
+			<item value="aula03pessoa"/>
+			<item value="aula03governador"/>
+			<item value="aula03livro"/>
+			<item value="aula03locacao"/>
+			<item value="ProjectManagement"/>
+			<item value="Aula01Sales"/>
+			<item value="Aula01Sale"/>
+			<item value="Aula01JDBC"/>
+			<item value="Aula01JPA"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+		<list key="ciManagementUrl">
+		</list>
+		<list key="ciManagementSystem">
+		</list>
+		<list key="issueManagementSystem">
+		</list>
+		<list key="issueManagementUrl">
+		</list>
+	</section>
+	<section name="MavenProjectWizardArchetypePage">
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardLocationPage">
+		<list key="location">
+			<item value="/Users/rogeriofontes/Documents/workspace-pos-java-persistencia/aula03livro"/>
+			<item value="/Users/rogeriofontes/Documents/workspace-pos-java-persistencia/aula02produto"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+		</list>
+	</section>
+	<section name="Maven2ProjectWizardArchifactPage">
+		<list key="package">
+		</list>
+		<list key="groupId">
+		</list>
+		<list key="artifactId">
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+</section>

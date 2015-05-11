@@ -1,0 +1,56 @@
+package br.edu.unitri.projectmanager.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
+
+import br.edu.unitri.projectmanager.domain.Empregado;
+import br.edu.unitri.projectmanager.util.JPAUtil;
+
+public class EmpregadoDAO {
+	EntityManager manager = null;
+
+	public EmpregadoDAO() {
+		manager = new JPAUtil().getEntityManager();
+
+	}
+
+	public void insereEmpregado(Empregado empregado) {
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+		manager.persist(empregado);
+		tx.commit();
+	}
+
+	public void alteraEmpregado(Empregado empregado) {
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+		manager.merge(empregado);
+		tx.commit();
+	}
+
+	public void deleteEmpregado(Empregado empregado) {
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+		manager.remove(empregado);
+		tx.commit();
+	}
+
+	public Empregado consultaEmpregadoPorId(Long id) {
+		return manager.find(Empregado.class, id);
+	}
+	
+	public List<Empregado> consultaEmpregado() {
+		TypedQuery<Empregado> query = manager.createQuery(
+				"Select f from Empregado f", Empregado.class);
+		return query.getResultList();
+	}
+	
+	public List<Empregado> consultaEmpregado() {
+		TypedQuery<Empregado> query = manager.createQuery(
+				"Select f from Empregado f", Empregado.class);
+		return query.getResultList();
+	}
+}

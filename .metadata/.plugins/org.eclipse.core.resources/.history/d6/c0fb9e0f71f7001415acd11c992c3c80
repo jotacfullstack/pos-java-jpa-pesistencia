@@ -1,0 +1,45 @@
+package br.edu.unitri.projectmanager.domain;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class LocalPorDeportamentoPK_old implements Serializable {
+
+	private static final long serialVersionUID = 7858625688583638818L;
+
+	@Column(name = "cod_local", nullable = false)
+	private Long codLocal;
+
+	@Column(name = "num_departamento", nullable = false)
+	private Long numDepartamento;
+
+	public LocalPorDeportamentoPK_old(Long codLocal, Long numDepartamento) {
+		super();
+		this.codLocal = codLocal;
+		this.numDepartamento = numDepartamento;
+	}
+
+	public LocalPorDeportamentoPK_old() {
+		super();
+	}
+
+	public Long getCodLocal() {
+		return codLocal;
+	}
+
+	public void setCodLocal(Long codLocal) {
+		this.codLocal = codLocal;
+	}
+
+	public Long getNumDepartamento() {
+		return numDepartamento;
+	}
+
+	public void setNumDepartamento(Long numDepartamento) {
+		this.numDepartamento = numDepartamento;
+	}
+
+}

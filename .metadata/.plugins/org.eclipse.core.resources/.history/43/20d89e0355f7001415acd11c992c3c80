@@ -1,0 +1,40 @@
+package br.edu.unitri.aula04pessoa;
+
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import br.edu.unitri.aula05fornecedor.dao.ProdutoDAO;
+import br.edu.unitri.aula05fornecedor.domain.Produto;
+
+public class GerenciarProdutosTest {
+	ProdutoDAO produtoDAO = null;
+
+	@Before
+	public void init() {
+		produtoDAO = new ProdutoDAO();
+	}
+
+	@Test
+	public void findProdutoByJpaQl() {
+		List<Produto> produtoes = produtoDAO.consultaProdutoByCriteria();
+		for (Produto produto : produtoes) {
+			System.out.println("Forncedor nome: " + produto.getNome());
+		}
+	}
+
+	public void findProdutoByCriteria() {
+		List<Produto> produtoes = produtoDAO.consultaProdutoByCriteria();
+		for (Produto produto : produtoes) {
+			System.out.println("Forncedor nome: " + produto.getNome());
+		}
+	}
+
+	public void findProdutoBySQLNativo() {
+		List<Produto> produtoes = produtoDAO.consultaProdutoBySQLNativo();
+		for (Produto produto : produtoes) {
+			System.out.println("Forncedor nome: " + produto.getNome());
+		}
+	}
+}

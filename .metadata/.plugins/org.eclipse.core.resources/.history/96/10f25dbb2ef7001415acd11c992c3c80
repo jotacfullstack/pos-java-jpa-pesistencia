@@ -1,0 +1,33 @@
+package br.edu.unitri.aula03locacao;
+
+import java.util.List;
+
+import br.edu.unitri.aula03locacao.dao.AvariaDAO;
+import br.edu.unitri.aula03locacao.dao.VeiculoCategoriaDAO;
+import br.edu.unitri.aula03locacao.domain.Avaria;
+import br.edu.unitri.aula03locacao.domain.Cliente;
+import br.edu.unitri.aula03locacao.domain.Funcionario;
+import br.edu.unitri.aula03locacao.domain.Locacao;
+import br.edu.unitri.aula03locacao.domain.Veiculo;
+import br.edu.unitri.aula03locacao.domain.VeiculoCategoria;
+
+public class VeiculoCategoriaTest {
+	public static void main(String args[]) {
+		VeiculoCategoriaDAO veiculoCategoriaDAO = new VeiculoCategoriaDAO();
+
+		VeiculoCategoria veiculoCategoria = new VeiculoCategoria(12d,
+				"Comercial");
+
+		VeiculoCategoria veiculoCategoria1 = new VeiculoCategoria(12d,
+				"utilitario");
+
+		veiculoCategoriaDAO.insereVeiculoCategoria(veiculoCategoria);
+		veiculoCategoriaDAO.insereVeiculoCategoria(veiculoCategoria1);
+
+		List<VeiculoCategoria> categorias = veiculoCategoriaDAO.consultaVeiculoCategoria();
+		for (Avaria avaria : avarias) {
+			System.out.println("Avaria Name Inseridos: " + avaria.getDescicao()
+					+ " = " + "cpf: " + avaria.getValor());
+		}
+	}
+}

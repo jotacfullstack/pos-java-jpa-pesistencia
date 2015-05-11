@@ -1,0 +1,31 @@
+1431299385097	Rename type 'Department'
+1431299659619	Rename type 'Employee'
+1431299863400	Rename type 'Dependent'
+1431299937754	Rename type 'Project'
+1431299967005	Rename type 'ProjectByEmployee'
+1431302553130	Rename type 'LocalPorDeportamentoPK'
+1431302569373	Delete element
+1431302578987	Delete element
+1431302995337	Delete element
+1431303007448	Rename type 'FuncionarioDAO'
+1431303027077	Copy compilation unit
+1431303038120	Copy compilation unit
+1431303046216	Copy compilation unit
+1431303054578	Copy compilation unit
+1431303079438	Copy compilation unit
+1431303381519	Rename type 'FuncionarioTest'
+1431303501939	Delete elements
+1431303512403	Delete elements
+1431303887406	Delete element
+1431304705238	Rename type 'DepartamentoTest'
+1431304719414	Rename type 'AutorLivrosTest'
+1431304950731	Delete element
+1431305228856	Rename type 'EmpregadoTest'
+1431305239714	Copy compilation unit
+1431305426189	Delete element
+1431305433924	Copy compilation unit
+1431305441414	Rename package 'br.edu.unitri.projectmanager.domain'
+1431305587722	Copy compilation unit
+1431305751342	Copy compilation unit
+1431305761237	Copy compilation unit
+1431306622154	Copy compilation unit

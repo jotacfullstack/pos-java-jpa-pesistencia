@@ -1,0 +1,47 @@
+package br.edu.unitri.aula03locacao;
+
+import java.util.List;
+
+import br.edu.unitri.aula03locacao.dao.AvariaDAO;
+import br.edu.unitri.aula03locacao.dao.VeiculoCategoriaDAO;
+import br.edu.unitri.aula03locacao.dao.VeiculoDAO;
+import br.edu.unitri.aula03locacao.domain.Avaria;
+import br.edu.unitri.aula03locacao.domain.Cliente;
+import br.edu.unitri.aula03locacao.domain.Funcionario;
+import br.edu.unitri.aula03locacao.domain.Locacao;
+import br.edu.unitri.aula03locacao.domain.Veiculo;
+import br.edu.unitri.aula03locacao.domain.VeiculoCategoria;
+
+public class VeiculoTest {
+	public static void main(String args[]) {
+		VeiculoCategoriaDAO veiculoCategoriaDAO = new VeiculoCategoriaDAO();
+		VeiculoDAO veiculoDAO = new VeiculoDAO();
+		
+		VeiculoCategoria vc1 = new VeiculoCategoria(12d,
+				"utilitario");
+
+		veiculoCategoriaDAO.insereVeiculoCategoria(vc1);
+		VeiculoCategoria veiculoCategoria = veiculoCategoriaDAO.consultaVeiculoCategoriaPorId(vc1.getId());
+		
+		Veiculo v1 = new Veiculo("Fiesta", "Ford", 12d, veiculoCategoria);
+		Veiculo v2 = new Veiculo("Focus", "Ford", 12d, veiculoCategoria);
+		Veiculo v3 = new Veiculo("Fiesta", "Ford", 12d, veiculoCategoria);
+	
+
+		Avaria c1 = new Avaria(12d, "batida", l1);
+		Avaria c2 = new Avaria(32d, "raspada", l1);
+		Avaria c3 = new Avaria(323d, "quebra", l1);
+		Avaria c4 = new Avaria(3d, "das", l1);
+
+		avariaDAO.insereAvaria(c1);
+		avariaDAO.insereAvaria(c2);
+		avariaDAO.insereAvaria(c3);
+		avariaDAO.insereAvaria(c4);
+
+		List<Avaria> avarias = avariaDAO.consultaAvaria();
+		for (Avaria avaria : avarias) {
+			System.out.println("Avaria Name Inseridos: " + avaria.getDescicao()
+					+ " = " + "cpf: " + avaria.getValor());
+		}
+	}
+}

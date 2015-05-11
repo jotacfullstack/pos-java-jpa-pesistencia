@@ -1,0 +1,5 @@
+package br.com.psi.domain;
+
+public class Employee {
+
+}

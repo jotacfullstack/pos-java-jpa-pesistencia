@@ -1,0 +1,16 @@
+package br.edu.unitri.aula04pessoa.domain;
+
+import java.io.Serializable;
+
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class Endereco implements Serializable {
+	private String pais;
+	private String estado;
+	private String cidade;
+	private String logradouro;
+	private int numero;
+	private String complemento;
+	private int cep;
+}

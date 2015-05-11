@@ -1,0 +1,22 @@
+package br.edu.unitri.projectmanager.domain;
+
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+
+@Entity
+public class LocalPorDeportamento implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private LocalPorDeportamentoPK_old id;
+
+	public LocalPorDeportamentoPK_old getId() {
+		return id;
+	}
+
+	public void setId(LocalPorDeportamentoPK_old id) {
+		this.id = id;
+	}
+
+}

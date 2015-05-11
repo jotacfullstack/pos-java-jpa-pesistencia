@@ -1,0 +1,23 @@
+package br.edu.unitri.aula03locacao.domain;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tb_cliente")
+public class Multa {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	private Double valor;
+	private String descicao;
+
+	@ManyToOne
+	@JoinColumn(name = "locacao_id")
+	private Locacao locacao;
+}

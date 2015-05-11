@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+	<persistence-unit name="managerPU" transaction-type="RESOURCE_LOCAL">
+		<class>br.edu.unitri.projectmanager.domain.Departamento</class>
+		<class>br.edu.unitri.projectmanager.domain.Dependente</class>
+		<class>br.edu.unitri.projectmanager.domain.Dependente</class>
+		<class>br.edu.unitri.projectmanager.domain.Gerencia</class>
+		<class>br.edu.unitri.projectmanager.domain.Local</class>
+		<class>br.edu.unitri.projectmanager.domain.Projeto</class>
+		<class>br.edu.unitri.projectmanager.domain.ProjetoPorEmpregado</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:managerv2Db;create=true" />
+			<property name="javax.persistence.jdbc.user" value="" />
+			<property name="javax.persistence.jdbc.password" value="" />
+
+			<!-- EclipseLink should create the database schema automatically -->
+			<property name="eclipselink.ddl-generation" value="create-tables" />
+			<!-- property name="eclipselink.ddl-generation" value="drop-and-create-tables" / -->
+			<property name="eclipselink.ddl-generation.output-mode"
+				value="database" />
+			<property name="eclipselink.logging.level" value="SEVERE" />
+		</properties>
+	</persistence-unit>
+
+	<!-- persistence-unit name="mysqlPersistenceUnit" transaction-type="RESOURCE_LOCAL"> 
+		<class>br.edu.unitri.projectmanager.domain.Employee</class> <class>br.edu.unitri.projectmanager.domain.Department</class> 
+		<properties> <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" 
+		/> <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/projectmanager" 
+		/> <property name="javax.persistence.jdbc.user" value="root" /> <property 
+		name="javax.persistence.jdbc.password" value="admin" /> <property name="hibernate.hbm2ddl.auto" 
+		value="create" /> <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" 
+		/> </properties> </persistence-unit -->
+</persistence>

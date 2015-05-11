@@ -1,0 +1,51 @@
+package br.edu.unitri.aula03locacao.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
+
+import br.edu.unitri.aula03locacao.domain.Funcionario;
+import br.edu.unitri.aula03locacao.domain.Locacao;
+import br.edu.unitri.aula03locacao.util.JPAUtil;
+
+public class LocacaoDAO {
+	EntityManager manager = null;
+
+	public LocacaoDAO() {
+		manager = new JPAUtil().getEntityManager();
+
+	}
+
+	public void insereLocacao(Locacao locacao) {
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+		manager.persist(locacao);
+		tx.commit();
+	}
+
+	public void alteraLocacao(Locacao locacao) {
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+		manager.merge(locacao);
+		tx.commit();
+	}
+
+	public void deleteLocacao(Locacao locacao) {
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+		manager.remove(locacao);
+		tx.commit();
+	}
+	
+	public Funcionario consultaFuncionarioPorId(Long id) {
+		return manager.find(Funcionario.class, id);
+	}
+
+	public List<Locacao> consultaLocacao() {
+		TypedQuery<Locacao> query = manager.createQuery(
+				"Select f from Locacao f", Locacao.class);
+		return query.getResultList();
+	}
+}

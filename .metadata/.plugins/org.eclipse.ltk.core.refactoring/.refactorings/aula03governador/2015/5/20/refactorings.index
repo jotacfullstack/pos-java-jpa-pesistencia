@@ -1,0 +1,9 @@
+1431278714859	Delete elements
+1431278777426	Rename type 'Autor'
+1431278788384	Rename type 'Livro'
+1431278954168	Rename type 'AutorDAO'
+1431279088871	Rename package 'br.edu.unitri.aula03livro.dao'
+1431279097660	Rename package 'br.edu.unitri.aula03livro.domain'
+1431279107275	Rename package 'br.edu.unitri.aula03livro.util'
+1431279114944	Rename package 'br.edu.unitri.aula03livro'
+1431279149825	Rename type 'AutorLivrosTest'

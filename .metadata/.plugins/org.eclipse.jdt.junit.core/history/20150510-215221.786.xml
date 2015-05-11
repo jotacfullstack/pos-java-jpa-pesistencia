@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="LocalTest (1)" project="ProjectManagementAula05e06" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="br.edu.unitri.projectmanager.LocalTest" time="13.257">
+    <testcase name="adicionaLocalLocals" classname="br.edu.unitri.projectmanager.LocalTest" time="9.489"/>
+    <testcase name="listaLocals" classname="br.edu.unitri.projectmanager.LocalTest" time="3.768"/>
+  </testsuite>
+</testrun>

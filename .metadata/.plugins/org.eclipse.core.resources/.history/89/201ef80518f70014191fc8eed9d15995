@@ -1,0 +1,15 @@
+package br.edu.unitri.aula03locacao.domain;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tb_cliente")
+public class Locacao {
+cliente
+veiculo
+funcionario_rec
+funcionario_cad
+qtd_dias
+kilometragem
+}

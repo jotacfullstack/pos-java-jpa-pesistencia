@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="EmpregadoTest" project="ProjectManagementAula05e06" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="br.edu.unitri.projectmanager.EmpregadoTest" time="2.856">
+    <testcase name="listaTodasAsInformacoesDosEmpregados" classname="br.edu.unitri.projectmanager.EmpregadoTest" time="2.093"/>
+    <testcase name="adicionaEmpregadoEmpregados" classname="br.edu.unitri.projectmanager.EmpregadoTest" time="0.555"/>
+    <testcase name="listaEmpregados" classname="br.edu.unitri.projectmanager.EmpregadoTest" time="0.208"/>
+  </testsuite>
+</testrun>

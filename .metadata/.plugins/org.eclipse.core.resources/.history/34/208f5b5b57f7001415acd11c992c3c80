@@ -1,0 +1,5 @@
+package br.edu.unitri.aula05fornecedor.vo;
+
+public class ProdutoFornecedorVO {
+
+}

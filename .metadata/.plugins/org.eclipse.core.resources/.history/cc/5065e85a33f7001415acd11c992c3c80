@@ -1,0 +1,7 @@
+package br.edu.unitri.aula03locacao.domain;
+
+import java.io.Serializable;
+
+public class Departamento implements Serializable {
+
+}

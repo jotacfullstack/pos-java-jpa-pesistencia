@@ -1,0 +1,45 @@
+package br.edu.unitri.projectmanager;
+
+import java.util.Date;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import br.edu.unitri.projectmanager.dao.DepartamentoDAO;
+import br.edu.unitri.projectmanager.dao.GerenciaDAO;
+import br.edu.unitri.projectmanager.domain.Gerencia;
+import br.edu.unitri.projectmanager.domain.GerenciaPK;
+
+public class GerenciaTest {
+	GerenciaDAO gerenciaDAO = null;
+	DepartamentoDAO departamentoDAO = null;
+
+	@Before
+	public void init() {
+		gerenciaDAO = new GerenciaDAO();
+	}
+
+	@Test
+	public void adicionaGerenciaGerencias() {
+		GerenciaDAO gerenciaDAO = new GerenciaDAO();
+		GerenciaPK id = new GerenciaPK();
+		id.setCodEmpregado(3243l);
+		id.setNumDepartamento(23243l);
+
+		Gerencia d1 = new Gerencia(id, new Date());
+		Gerencia d2 = new Gerencia(id, new Date());
+		gerenciaDAO.insereGerencia(d1);
+		gerenciaDAO.insereGerencia(d2);
+	}
+
+	@Test
+	public void listaGerencias() {
+		List<Gerencia> gerencias = gerenciaDAO.consultaGerencia();
+		for (Gerencia gerencia : gerencias) {
+			System.out.println("Avaria Name Inseridos: "
+					+ gerencia.getId().getCodEmpregado());
+		}
+	}
+
+}

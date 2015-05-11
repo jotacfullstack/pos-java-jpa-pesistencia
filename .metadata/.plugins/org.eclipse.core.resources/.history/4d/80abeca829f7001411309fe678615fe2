@@ -1,0 +1,40 @@
+package br.edu.unitri.aula03locacao;
+
+import java.util.List;
+
+import br.edu.unitri.aula03locacao.dao.ClienteDAO;
+import br.edu.unitri.aula03locacao.dao.FuncionarioDAO;
+import br.edu.unitri.aula03locacao.dao.LocacaoDAO;
+import br.edu.unitri.aula03locacao.dao.VeiculoDAO;
+import br.edu.unitri.aula03locacao.domain.Locacao;
+
+public class LocacaoTest {
+	public static void main(String args[]) {
+		LocacaoDAO locacaoDAO = new LocacaoDAO();
+		ClienteDAO clienteDAO = new ClienteDAO();
+		VeiculoDAO veiculoDAO = new VeiculoDAO();
+		FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+
+		Cliente cliente = clienteDAO.consultaClientePorId(1l);
+		Veiculo veivulo = veiculoDAO.consultaVeiculoPorId(1l);
+		Funcionario funcionario = funcionarioDAO.consultaFuncionarioPorId(1l);
+
+		Locacao c1 = new Locacao(cliente, veiculo, funcionario, 120, 120000);
+		Locacao c2 = new Locacao(cliente, veiculo, funcionario, 120, 120000);
+		Locacao c3 = new Locacao(cliente, veiculo, funcionario, 120, 120000);
+		Locacao c4 = new Locacao(cliente, veiculo, funcionario, 120, 120000);
+
+		locacaoDAO.insereLocacao(c1);
+		locacaoDAO.insereLocacao(c2);
+		locacaoDAO.insereLocacao(c3);
+		locacaoDAO.insereLocacao(c4);
+
+		List<Locacao> locacaos = locacaoDAO.consultaLocacao();
+		for (Locacao locacao : locacaos) {
+			System.out.println("Locacao Name Inseridos: "
+					+ locacao.getVeiculo().getDescicao() + " = " + "cpf: "
+					+ locacao.getQuantidadeDias());
+		}
+
+	}
+}

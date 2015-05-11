@@ -1,0 +1,41 @@
+package aula02produto;
+
+import java.util.List;
+
+import br.edu.unitri.aula02produto.dao.FornecedorDAO;
+import br.edu.unitri.aula02produto.domain.Fornecedor;
+
+public class JPAManagerTest {
+
+	public static void main(String args[]) {
+		FornecedorDAO dao = new FornecedorDAO();
+		
+		Fornecedor f1 = new Fornecedor("Alpargatas");
+		Fornecedor f2 = new Fornecedor("Unilever");
+		Fornecedor f3 = new Fornecedor("Sadia");
+		Fornecedor f4 = new Fornecedor("Perdigão");
+
+		dao.insereFornecedor(f1);
+		dao.insereFornecedor(f2);
+		dao.insereFornecedor(f3);
+		dao.insereFornecedor(f4);
+
+	//	persist(new Produto("havaianas top", f1));
+	//	persist(new Produto("havaianas color", f1));
+	//	persist(new Produto("linguiça toscana", f3));
+
+		List<Fornecedor> fornecedores = dao.consultaFornedorByJpaQl();
+		for (Fornecedor fornecedor : fornecedores) {
+			System.out.println("Fornecedor: " + fornecedor.getNome());
+		}
+		List<Fornecedor> fornecedores1 = dao.consultaFornedorByCriteria();
+		for (Fornecedor fornecedor1 : fornecedores1) {
+			System.out.println("Fornecedor: " + fornecedor.getNome());
+		}
+		List<Fornecedor> fornecedores2 = dao.consultaFornedorBySQLNativo();
+		for (Fornecedor fornecedor1 : fornecedores2) {
+			System.out.println("Fornecedor: " + fornecedor.getNome());
+		}
+
+	}
+}

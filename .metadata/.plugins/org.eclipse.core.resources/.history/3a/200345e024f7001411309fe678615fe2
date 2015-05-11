@@ -1,0 +1,42 @@
+package br.edu.unitri.aula03locacao;
+
+import java.util.List;
+
+import br.edu.unitri.aula03locacao.dao.FuncionarioDAO;
+import br.edu.unitri.aula03locacao.domain.Funcionario;
+
+public class FuncionarioTest {
+	public static void main(String args[]) {
+		FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+
+		Funcionario c1 = new Funcionario("Maria", "2345234534");
+		Funcionario c2 = new Funcionario("José", "2345234534");
+		Funcionario c3 = new Funcionario("Antonio", "2345234534");
+		Funcionario c4 = new Funcionario("Joana", "3425234");
+
+		funcionarioDAO.insereFuncionario(c1);
+		funcionarioDAO.insereFuncionario(c2);
+		funcionarioDAO.insereFuncionario(c3);
+		funcionarioDAO.insereFuncionario(c4);
+		
+		List<Funcionario> funcionarios = funcionarioDAO.consultaFuncionario();
+		for (Funcionario funcionario : funcionarios) {
+			System.out.println("Funcionario Name Inseridos: " + funcionario.getNome() + " = "
+					+ "cpf: " + funcionario.getMatricula());
+		}
+		
+		Funcionario result = funcionarioDAO.consultaFuncionarioPorId(2l);
+		result.setNome("Maria Joana");
+		
+		funcionarioDAO.alteraFuncionario(result);
+		
+		Funcionario remove = funcionarioDAO.consultaFuncionarioPorId(3l);
+		funcionarioDAO.deleteFuncionario(remove);
+		
+		List<Funcionario> funcionariosAlterados = funcionarioDAO.consultaFuncionario();
+		for (Funcionario funcionario : funcionariosAlterados) {
+			System.out.println("Funcionario Name alterados: " + funcionario.getNome() + " = "
+					+ "cpf: " + funcionario.getMatricula());
+		}
+	}
+}

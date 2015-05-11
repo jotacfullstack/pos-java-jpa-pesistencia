@@ -1,0 +1,51 @@
+package br.edu.unitri.aula03locacao.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
+
+import br.edu.unitri.aula03locacao.domain.Funcionario;
+import br.edu.unitri.aula03locacao.domain.VeiculoCategoria;
+import br.edu.unitri.aula03locacao.util.JPAUtil;
+
+public class VeiculoCategoriaDAO {
+	EntityManager manager = null;
+
+	public VeiculoCategoriaDAO() {
+		manager = new JPAUtil().getEntityManager();
+
+	}
+
+	public void insereVeiculoCategoria(VeiculoCategoria veiculoCategoria) {
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+		manager.persist(veiculoCategoria);
+		tx.commit();
+	}
+
+	public void alteraVeiculoCategoria(VeiculoCategoria veiculoCategoria) {
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+		manager.merge(veiculoCategoria);
+		tx.commit();
+	}
+
+	public void deleteVeiculoCategoria(VeiculoCategoria veiculoCategoria) {
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+		manager.remove(veiculoCategoria);
+		tx.commit();
+	}
+	
+	public Funcionario consultaFuncionarioPorId(Long id) {
+		return manager.find(Funcionario.class, id);
+	}
+
+	public List<VeiculoCategoria> consultaVeiculoCategoria() {
+		TypedQuery<VeiculoCategoria> query = manager.createQuery(
+				"Select f from VeiculoCategoria f", VeiculoCategoria.class);
+		return query.getResultList();
+	}
+}

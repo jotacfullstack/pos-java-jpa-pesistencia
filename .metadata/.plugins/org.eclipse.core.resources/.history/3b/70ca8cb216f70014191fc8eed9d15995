@@ -1,0 +1,25 @@
+package br.edu.unitri.aula03locacao.domain;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tb_veiculo_categoria")
+public class VeiculoCategoria implements Serializable {
+
+	private static final long serialVersionUID = -8245697393337213928L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	@Column(name = "preco_base")
+	private Double precoBase;
+	private String descricao;
+
+}

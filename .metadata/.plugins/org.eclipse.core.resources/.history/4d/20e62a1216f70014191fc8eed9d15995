@@ -1,0 +1,13 @@
+package br.edu.unitri.aula03locacao.domain;
+
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="tb_funcionario")
+public class Funcionario implements Serializable {
+nome
+matricula
+}

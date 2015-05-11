@@ -1,0 +1,5 @@
+package br.edu.unitri.aula03livro.domain;
+
+public class PessaoFisica {
+
+}

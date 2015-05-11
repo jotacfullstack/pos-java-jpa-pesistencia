@@ -1,0 +1,44 @@
+package br.edu.unitri.aula04pessoa;
+
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import br.edu.unitri.aula05fornecedor.dao.FornecedorDAO;
+import br.edu.unitri.aula05fornecedor.dao.ProdutoDAO;
+import br.edu.unitri.aula05fornecedor.domain.Fornecedor;
+
+public class GerenciarFornecedoresTest {
+	FornecedorDAO fornecedorDAO = null;
+
+	@Before
+	public void init() {
+		fornecedorDAO = new FornecedorDAO();
+	}
+
+	@Test
+	public void findFornecedorByJpaQl() {
+		List<Fornecedor> fornecedores = fornecedorDAO
+				.consultaFornedorByCriteria();
+		for (Fornecedor fornecedor : fornecedores) {
+			System.out.println("Forncedor nome: " + fornecedor.getNome());
+		}
+	}
+
+	public void findFornecedorByCriteria() {
+		List<Fornecedor> fornecedores = fornecedorDAO
+				.consultaFornedorByCriteria();
+		for (Fornecedor fornecedor : fornecedores) {
+			System.out.println("Forncedor nome: " + fornecedor.getNome());
+		}
+	}
+
+	public void findFornecedorBySQLNativo() {
+		List<Fornecedor> fornecedores = fornecedorDAO
+				.consultaFornedorBySQLNativo();
+		for (Fornecedor fornecedor : fornecedores) {
+			System.out.println("Forncedor nome: " + fornecedor.getNome());
+		}
+	}
+}

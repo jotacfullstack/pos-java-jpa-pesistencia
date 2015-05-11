@@ -1,0 +1,13 @@
+package br.edu.unitri.projectmanager.domain;
+
+import java.io.Serializable;
+
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+
+@Entity
+public class Gerencia implements Serializable {
+	
+	@EmbeddedId
+	private GerenciaPK id;
+}

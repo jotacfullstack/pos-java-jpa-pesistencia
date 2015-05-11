@@ -1,0 +1,50 @@
+package br.edu.unitri.projectmanager;
+
+import static org.junit.Assert.assertNotNull;
+
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import br.edu.unitri.projectmanager.dao.DepartamentoDAO;
+import br.edu.unitri.projectmanager.domain.Departamento;
+
+public class DepartamentoTest {
+	DepartamentoDAO departamentoDAO = null;
+
+	@Before
+	public void init() {
+		departamentoDAO = new DepartamentoDAO();
+	}
+
+	@Test
+	public void adicionaDepartamentoDepartamentos() {
+
+		DepartamentoDAO departamentoDAO = new DepartamentoDAO();
+		Departamento d1 = new Departamento("Comercial");
+		Departamento d2 = new Departamento("Fincanceiro");
+		departamentoDAO.insereDepartamento(d1);
+		departamentoDAO.insereDepartamento(d2);
+
+	}
+
+	@Test
+	public void listaDepartamentos() {
+		List<Departamento> departamentos = departamentoDAO
+				.consultaDepartamento();
+		for (Departamento departamento : departamentos) {
+			System.out.println("Avaria Name Inseridos: "
+					+ departamento.getNome() + " = " + "cpf: "
+					+ departamento.getNome());
+		}
+	}
+
+	@Test //Exercicio A - Sem Criteria
+	public void listaTotalDepartamentos() {
+		Long totalDepartamentos = departamentoDAO.totalDepartamentos();
+		System.out.println(totalDepartamentos);
+		assertNotNull(totalDepartamentos);
+	}
+
+}

@@ -1,0 +1,20 @@
+package br.com.psi.util;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+
+public class JPAUtil {
+	
+	private static EntityManagerFactory emf = Persistence
+			.createEntityManagerFactory("persistencePU");
+
+	public static EntityManager createEntityManager() {
+		return emf.createEntityManager();
+	}
+
+	public static EntityTransaction getEntityTransaction() {
+		return createEntityManager().getTransaction();
+	}
+}

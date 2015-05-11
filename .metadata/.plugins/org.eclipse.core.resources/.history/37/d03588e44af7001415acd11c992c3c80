@@ -1,0 +1,84 @@
+package br.edu.unitri.aula03livro.domain;
+
+import java.io.Serializable;
+import java.util.Collection;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+@Entity
+public class PessoaJuridica  extends Pessoa implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String nome;
+	private Double preco;
+	private String editora;
+	@ManyToMany
+	@JoinTable(name = "Liv_Aut", joinColumns = @JoinColumn(name = "Liv_ID"), inverseJoinColumns = @JoinColumn(name = "Aut_ID"))
+	private Collection<Pessoa> autores;
+
+	public PessoaJuridica() {
+		super();
+	}
+
+	public PessoaJuridica(Long id, String nome, Double preco) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.preco = preco;
+	}
+
+	public void teste1() {
+
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
+
+	public String getEditora() {
+		return editora;
+	}
+
+	public void setEditora(String editora) {
+		this.editora = editora;
+	}
+
+	public Collection<Pessoa> getAutores() {
+		return autores;
+	}
+
+	public void setAutores(Collection<Pessoa> autores) {
+		this.autores = autores;
+	}
+
+}

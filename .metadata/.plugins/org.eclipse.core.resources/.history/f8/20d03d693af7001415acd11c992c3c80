@@ -1,0 +1,36 @@
+package br.edu.unitri.aula03governador.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
+
+import br.edu.unitri.aula03livro.domain.Estado;
+import br.edu.unitri.aula03livro.util.JPAUtil;
+
+public class EstadoDAO {
+	EntityManager manager = null;
+
+	public EstadoDAO() {
+		manager = new JPAUtil().getEntityManager();
+	}
+
+	public void insereEstado(Estado estado) {
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+		manager.persist(estado);
+		tx.commit();
+	}
+
+	public Estado buscaPorId(Long id) {
+		return manager.find(Estado.class, id);
+	}
+
+	public List<Estado> consultaEstado() {
+		TypedQuery<Estado> query = manager.createQuery(
+				"Select f from Estado f", Estado.class);
+		return query.getResultList();
+	}
+
+}

@@ -1,0 +1,67 @@
+package br.edu.unitri.projectmanager.domain;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+
+public class EmployeeDepedentTest {
+	private EntityManager manager;
+
+	public EmployeeDepedentTest(EntityManager manager) {
+		this.manager = manager;
+	}
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		EntityManagerFactory factory = Persistence
+				.createEntityManagerFactory("mysqlPersistenceUnit");
+		EntityManager manager = factory.createEntityManager();
+		EmployeeDepedentTest test = new EmployeeDepedentTest(manager);
+
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+		try {
+			test.createDependents();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		tx.commit();
+
+		test.listDependets();
+
+		System.out.println(".. done");
+	}
+
+	private void createDependents() {
+		int numOfDependents = manager
+				.createQuery("Select a From Dependent a", Dependent.class)
+				.getResultList().size();
+		if (numOfDependents == 0) {
+			
+			Departmento department = new Departmento("java");
+			manager.persist(department);
+			
+			Empregado employee = new Empregado("Jakab Gipsz", department);
+			manager.persist(employee);
+			
+			Dependent dependent = new Dependent("Rogerio", employee);
+			
+			manager.persist(dependent);
+
+		}
+	}
+
+	private void listDependets() {
+		List<Dependent> resultList = manager.createQuery(
+				"Select a From Dependent a", Dependent.class).getResultList();
+		System.out.println("num of depents:" + resultList.size());
+		for (Dependent next : resultList) {
+			System.out.println("next dependet: " + next);
+		}
+	}
+}

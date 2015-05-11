@@ -1,0 +1,37 @@
+package br.edu.unitri.aula05fornecedor.vo;
+
+public class ProdutoFornecedorVO {
+	private String produto;
+	private String fornecedor;
+
+	public ProdutoFornecedorVO() {
+		super();
+	}
+
+	public ProdutoFornecedorVO(String produto, String fornecedor) {
+		super();
+		this.produto = produto;
+		this.fornecedor = fornecedor;
+	}
+
+	public String getProd() {
+		return prod;
+	}
+
+	public void setProd(String prod) {
+		this.prod = prod;
+	}
+
+	public String getForn() {
+		return forn;
+	}
+
+	public void setForn(String forn) {
+		this.forn = forn;
+	}
+
+	@Override
+	public String toString() {
+		return "ProdFornVO [prod=" + prod + ", forn=" + forn + "]";
+	}
+}

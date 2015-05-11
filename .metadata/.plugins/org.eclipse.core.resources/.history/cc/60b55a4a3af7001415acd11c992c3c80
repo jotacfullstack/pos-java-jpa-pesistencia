@@ -1,0 +1,47 @@
+package br.edu.unitri.aula03livro.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+
+import br.edu.unitri.aula03livro.domain.Governador;
+import br.edu.unitri.aula03livro.util.JPAUtil;
+
+public class GovernadorDAO {
+	EntityManager manager = null;
+
+	public GovernadorDAO() {
+		manager = new JPAUtil().getEntityManager();
+	}
+
+	public void insereGovernador(Governador Governador) {
+		EntityTransaction tx = manager.getTransaction();
+		tx.begin();
+		manager.persist(Governador);
+		tx.commit();
+	}
+
+	public List<Governador> consultaGovernador() {
+		TypedQuery<Governador> query = manager.createQuery(
+				"Select f from Governador f", Governador.class);
+		return query.getResultList();
+	}
+
+	public List<Governador> consultaGovernadorByCriteria() {
+		CriteriaBuilder cb = manager.getCriteriaBuilder();
+		CriteriaQuery<Governador> cq = cb.createQuery(Governador.class);
+		return manager.createQuery(cq).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Governador> consultaGovernadorBySQLNativo() {
+		Query q = manager.createNativeQuery("Select * from tb_produto",
+				Governador.class);
+		return q.getResultList();
+	}
+}
